@@ -67,12 +67,11 @@ export default function Search() {
 
   const filteredProperties = sampleProperties.filter(property => {
     const matchesSearch = 
-      property.address.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      property.type.toLowerCase().includes(searchQuery.toLowerCase())
+      property.address.toLowerCase().includes(searchQuery.toLowerCase())
 
     const matchesPrice = 
-      property.price.replace(/[^0-9]/g, '') >= filters.priceRange[0] &&
-      property.price.replace(/[^0-9]/g, '') <= filters.priceRange[1]
+      parseInt(property.price.replace(/[^0-9]/g, '')) >= filters.priceRange[0] &&
+      parseInt(property.price.replace(/[^0-9]/g, '')) <= filters.priceRange[1]
 
     const matchesBeds = 
       filters.beds.length === 0 || 
