@@ -20,9 +20,7 @@ export default function RootLayout({
     <html lang="en" className={inter.variable}>
       <body className={inter.className}>
         <AuthProvider>
-          <main className="min-h-screen">
-            {children}
-          </main>
+          {children}
         </AuthProvider>
       </body>
     </html>
