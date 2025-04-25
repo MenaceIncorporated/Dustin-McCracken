@@ -6,7 +6,7 @@ import { Bed, Bath, Ruler } from 'lucide-react'
 interface PropertyCardProps {
   id: number
   imageUrl: string
-  price: number
+  price: string
   address: string
   beds: number
   baths: number
@@ -44,7 +44,7 @@ export default function PropertyCard({
       
       <div className="p-4">
         <div className="text-[#E31837] font-bold text-xl mb-2">
-          ${price.toLocaleString()}
+          ${price}
         </div>
         
         <div className="text-[#333333] font-medium mb-4">

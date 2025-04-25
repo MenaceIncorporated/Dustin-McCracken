@@ -6,55 +6,52 @@ import MapView from '@/components/features/MapView'
 import PropertyCard from '@/components/features/PropertyCard'
 import SearchFilters from '@/components/features/SearchFilters'
 
-// Sample data - replace with actual API data
-const sampleProperties = [
+interface Property {
+  id: number;
+  imageUrl: string;
+  price: string;
+  address: string;
+  beds: number;
+  baths: number;
+  sqft: number;
+  lat?: number;
+  lng?: number;
+}
+
+// Sample property data
+const sampleProperties: Property[] = [
   {
-    id: '1',
+    id: 1,
     imageUrl: 'https://picsum.photos/seed/property1/800/600',
     price: '$750,000',
-    address: '123 Main St, Anytown, CA 90210',
+    address: '123 Main St, Anytown, CA',
     beds: 4,
     baths: 3,
     sqft: 2500,
-    type: 'Single Family',
-    lat: 34.0522,
-    lng: -118.2437
+    lat: 37.7749,
+    lng: -122.4194
   },
   {
-    id: '2',
+    id: 2,
     imageUrl: 'https://picsum.photos/seed/property2/800/600',
-    price: '$625,000',
-    address: '456 Oak Ave, Somewhere, CA 90211',
+    price: '$950,000',
+    address: '456 Oak Ave, Somewhere, CA',
     beds: 3,
     baths: 2,
-    sqft: 1800,
-    type: 'Condo',
-    lat: 34.0622,
-    lng: -118.2537
+    sqft: 2000,
+    lat: 37.7749,
+    lng: -122.4194
   },
   {
-    id: '3',
+    id: 3,
     imageUrl: 'https://picsum.photos/seed/property3/800/600',
-    price: '$895,000',
-    address: '789 Pine St, Elsewhere, CA 90212',
-    beds: 5,
-    baths: 4,
-    sqft: 3200,
-    type: 'Single Family',
-    lat: 34.0722,
-    lng: -118.2637
-  },
-  {
-    id: '4',
-    imageUrl: 'https://picsum.photos/seed/property4/800/600',
     price: '$550,000',
-    address: '321 Elm St, Nowhere, CA 90213',
-    beds: 3,
+    address: '789 Pine Rd, Anywhere, CA',
+    beds: 2,
     baths: 2,
-    sqft: 1600,
-    type: 'Townhouse',
-    lat: 34.0822,
-    lng: -118.2737
+    sqft: 1500,
+    lat: 37.7749,
+    lng: -122.4194
   }
 ]
 
