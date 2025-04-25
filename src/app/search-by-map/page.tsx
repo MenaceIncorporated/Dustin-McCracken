@@ -18,6 +18,14 @@ interface Property {
   lng?: number;
 }
 
+interface Filters {
+  priceRange: [number, number]
+  beds: number[]
+  baths: number[]
+  propertyTypes: string[]
+  features: string[]
+}
+
 // Sample property data
 const sampleProperties: Property[] = [
   {
@@ -58,13 +66,13 @@ const sampleProperties: Property[] = [
 export default function SearchByMap() {
   const [searchQuery, setSearchQuery] = useState('')
   const [showFilters, setShowFilters] = useState(false)
-  const [activePropertyId, setActivePropertyId] = useState<string>()
-  const [filters, setFilters] = useState({
-    priceRange: [0, 2000000] as [number, number],
-    beds: [] as number[],
-    baths: [] as number[],
-    propertyTypes: [] as string[],
-    features: [] as string[]
+  const [activePropertyId, setActivePropertyId] = useState<number>()
+  const [filters, setFilters] = useState<Filters>({
+    priceRange: [0, 2000000],
+    beds: [],
+    baths: [],
+    propertyTypes: [],
+    features: []
   })
 
   const handleApplyFilters = (newFilters: typeof filters) => {
@@ -73,7 +81,7 @@ export default function SearchByMap() {
   }
 
   const handleMarkerClick = (propertyId: string) => {
-    setActivePropertyId(propertyId)
+    setActivePropertyId(parseInt(propertyId))
     // Scroll to the property card
     const element = document.getElementById(`property-${propertyId}`)
     if (element) {
@@ -91,10 +99,12 @@ export default function SearchByMap() {
       parseInt(property.price.replace(/[^0-9]/g, '')) <= filters.priceRange[1]
 
     const matchesBeds = 
-      !filters.beds || property.beds >= filters.beds
+      filters.beds.length === 0 || 
+      filters.beds.includes(property.beds)
 
     const matchesBaths = 
-      !filters.baths || property.baths >= filters.baths
+      filters.baths.length === 0 || 
+      filters.baths.includes(property.baths)
 
     const matchesType = 
       filters.propertyTypes.length === 0 || 
