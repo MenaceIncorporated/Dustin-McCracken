@@ -5,14 +5,14 @@ import { MapPin } from 'lucide-react'
 
 interface MapViewProps {
   properties: {
-    id: string
+    id: number
     lat: number
     lng: number
     price: string
     address: string
   }[]
   onMarkerClick: (propertyId: string) => void
-  activePropertyId?: string
+  activePropertyId?: number
 }
 
 export default function MapView({ properties, onMarkerClick, activePropertyId }: MapViewProps) {
@@ -51,7 +51,7 @@ export default function MapView({ properties, onMarkerClick, activePropertyId }:
 
       // Add click event listener
       marker.addListener('click', () => {
-        onMarkerClick(property.id)
+        onMarkerClick(property.id.toString())
       })
 
       return marker
