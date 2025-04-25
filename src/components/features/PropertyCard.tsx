@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { Bed, Bath, Ruler } from 'lucide-react'
+import { Bed, Bath, Ruler, BedDouble, Maximize2 } from 'lucide-react'
 
 interface PropertyCardProps {
   id: number
@@ -29,14 +29,14 @@ export default function PropertyCard({
   return (
     <div
       onClick={onClick}
-      className={`bg-white rounded-lg shadow-sm overflow-hidden cursor-pointer transition-all duration-200 ${
-        isActive ? 'ring-2 ring-[#E31837]' : 'hover:shadow-md'
+      className={`bg-white rounded-lg shadow-md overflow-hidden cursor-pointer transform transition-transform duration-200 hover:scale-[1.02] ${
+        isActive ? 'ring-2 ring-[#E31837]' : ''
       }`}
     >
       <div className="relative h-48">
         <Image
           src={imageUrl}
-          alt={address}
+          alt={`Property at ${address}`}
           fill
           className="object-cover"
         />
@@ -44,24 +44,22 @@ export default function PropertyCard({
       
       <div className="p-4">
         <div className="text-[#E31837] font-bold text-xl mb-2">
-          ${price}
+          {price}
         </div>
         
-        <div className="text-[#333333] font-medium mb-4">
-          {address}
-        </div>
+        <div className="text-gray-700 mb-2">{address}</div>
         
-        <div className="flex items-center space-x-4 text-[#666666]">
+        <div className="flex justify-between text-gray-600">
           <div className="flex items-center">
-            <Bed className="h-4 w-4 mr-1" />
+            <BedDouble className="w-5 h-5 mr-1" />
             <span>{beds}</span>
           </div>
           <div className="flex items-center">
-            <Bath className="h-4 w-4 mr-1" />
+            <Bath className="w-5 h-5 mr-1" />
             <span>{baths}</span>
           </div>
           <div className="flex items-center">
-            <Ruler className="h-4 w-4 mr-1" />
+            <Maximize2 className="w-5 h-5 mr-1" />
             <span>{sqft.toLocaleString()} sqft</span>
           </div>
         </div>

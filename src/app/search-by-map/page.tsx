@@ -91,12 +91,10 @@ export default function SearchByMap() {
       parseInt(property.price.replace(/[^0-9]/g, '')) <= filters.priceRange[1]
 
     const matchesBeds = 
-      filters.beds.length === 0 || 
-      filters.beds.includes(property.beds)
+      !filters.beds || property.beds >= filters.beds
 
     const matchesBaths = 
-      filters.baths.length === 0 || 
-      filters.baths.includes(property.baths)
+      !filters.baths || property.baths >= filters.baths
 
     const matchesType = 
       filters.propertyTypes.length === 0 || 
