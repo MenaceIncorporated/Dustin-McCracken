@@ -111,6 +111,12 @@ export default function SearchByMap() {
     return matchesSearch && matchesPrice && matchesBeds && matchesBaths && matchesType
   })
 
+  // Filter properties for map view (must have coordinates)
+  const mapProperties = filteredProperties.filter(
+    (property): property is Property & { lat: number; lng: number } =>
+      typeof property.lat === 'number' && typeof property.lng === 'number'
+  )
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Search Bar */}
@@ -157,7 +163,7 @@ export default function SearchByMap() {
           {/* Map */}
           <div className="lg:col-span-2 h-[600px]">
             <MapView
-              properties={filteredProperties}
+              properties={mapProperties}
               onMarkerClick={handleMarkerClick}
               activePropertyId={activePropertyId}
             />
