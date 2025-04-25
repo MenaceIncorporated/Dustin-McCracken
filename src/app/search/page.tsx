@@ -79,8 +79,7 @@ export default function Search() {
       filters.baths.includes(property.baths)
 
     const matchesType = 
-      filters.propertyTypes.length === 0 || 
-      filters.propertyTypes.includes(property.type)
+      filters.propertyTypes.length === 0
 
     return matchesSearch && matchesPrice && matchesBeds && matchesBaths && matchesType
   })
