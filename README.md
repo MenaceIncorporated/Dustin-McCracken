@@ -1,3 +1,29 @@
+# Real Estate Platform
+
+## Environment Variables
+
+The following environment variables need to be set in your Vercel project settings:
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
+```
+
+## Development
+
+1. Clone the repository
+2. Install dependencies: `npm install`
+3. Set up environment variables
+4. Run the development server: `npm run dev`
+
+## Deployment
+
+1. Push your changes to GitHub
+2. Set up a new project in Vercel
+3. Configure the environment variables in your Vercel project settings
+4. Deploy!
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
