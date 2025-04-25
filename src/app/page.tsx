@@ -9,7 +9,7 @@ const sampleProperties = [
   {
     id: 1,
     imageUrl: 'https://picsum.photos/seed/property1/800/600',
-    price: 750000,
+    price: '$750,000',
     address: '123 Main St, Anytown, CA',
     beds: 4,
     baths: 3,
@@ -18,7 +18,7 @@ const sampleProperties = [
   {
     id: 2,
     imageUrl: 'https://picsum.photos/seed/property2/800/600',
-    price: 950000,
+    price: '$950,000',
     address: '456 Oak Ave, Somewhere, CA',
     beds: 3,
     baths: 2,
@@ -27,7 +27,7 @@ const sampleProperties = [
   {
     id: 3,
     imageUrl: 'https://picsum.photos/seed/property3/800/600',
-    price: 550000,
+    price: '$550,000',
     address: '789 Pine Rd, Anywhere, CA',
     beds: 2,
     baths: 2,
