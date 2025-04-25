@@ -87,14 +87,17 @@ export default function SearchFilters({ onApply }: SearchFiltersProps) {
       <div>
         <h3 className="text-lg font-medium text-gray-900 mb-4">Beds</h3>
         <div className="grid grid-cols-3 gap-2">
-          {[1, 2, 3, 4, 5, '5+'].map((value) => (
-            <Checkbox
-              key={value}
-              id={`bed-${value}`}
-              checked={beds.includes(typeof value === 'number' ? value : 6)}
-              onCheckedChange={() => handleBedChange(typeof value === 'number' ? value : 6)}
-              label={`${value} ${value === 1 ? 'Bed' : 'Beds'}`}
-            />
+          {[1, 2, 3, 4, 5].map((value) => (
+            <div key={value} className="flex items-center space-x-2">
+              <Checkbox
+                id={`bed-${value}`}
+                checked={beds.includes(value)}
+                onCheckedChange={() => handleBedChange(value)}
+              />
+              <label htmlFor={`bed-${value}`} className="text-sm">
+                {value} {value === 1 ? 'Bed' : 'Beds'}
+              </label>
+            </div>
           ))}
         </div>
       </div>
@@ -102,14 +105,17 @@ export default function SearchFilters({ onApply }: SearchFiltersProps) {
       <div>
         <h3 className="text-lg font-medium text-gray-900 mb-4">Baths</h3>
         <div className="grid grid-cols-3 gap-2">
-          {[1, 1.5, 2, 2.5, 3, '3+'].map((value) => (
-            <Checkbox
-              key={value}
-              id={`bath-${value}`}
-              checked={baths.includes(typeof value === 'number' ? value : 4)}
-              onCheckedChange={() => handleBathChange(typeof value === 'number' ? value : 4)}
-              label={`${value} ${value === 1 ? 'Bath' : 'Baths'}`}
-            />
+          {[1, 1.5, 2, 2.5, 3].map((value) => (
+            <div key={value} className="flex items-center space-x-2">
+              <Checkbox
+                id={`bath-${value}`}
+                checked={baths.includes(value)}
+                onCheckedChange={() => handleBathChange(value)}
+              />
+              <label htmlFor={`bath-${value}`} className="text-sm">
+                {value} {value === 1 ? 'Bath' : 'Baths'}
+              </label>
+            </div>
           ))}
         </div>
       </div>
@@ -118,13 +124,16 @@ export default function SearchFilters({ onApply }: SearchFiltersProps) {
         <h3 className="text-lg font-medium text-gray-900 mb-4">Property Type</h3>
         <div className="space-y-2">
           {['Single Family', 'Condo', 'Townhouse', 'Multi-Family'].map((type) => (
-            <Checkbox
-              key={type}
-              id={`type-${type}`}
-              checked={propertyTypes.includes(type)}
-              onCheckedChange={() => handlePropertyTypeChange(type)}
-              label={type}
-            />
+            <div key={type} className="flex items-center space-x-2">
+              <Checkbox
+                id={`type-${type}`}
+                checked={propertyTypes.includes(type)}
+                onCheckedChange={() => handlePropertyTypeChange(type)}
+              />
+              <label htmlFor={`type-${type}`} className="text-sm">
+                {type}
+              </label>
+            </div>
           ))}
         </div>
       </div>
@@ -133,13 +142,16 @@ export default function SearchFilters({ onApply }: SearchFiltersProps) {
         <h3 className="text-lg font-medium text-gray-900 mb-4">Features</h3>
         <div className="space-y-2">
           {['Garage', 'Pool', 'Fireplace', 'Air Conditioning', 'Basement'].map((feature) => (
-            <Checkbox
-              key={feature}
-              id={`feature-${feature}`}
-              checked={features.includes(feature)}
-              onCheckedChange={() => handleFeatureChange(feature)}
-              label={feature}
-            />
+            <div key={feature} className="flex items-center space-x-2">
+              <Checkbox
+                id={`feature-${feature}`}
+                checked={features.includes(feature)}
+                onCheckedChange={() => handleFeatureChange(feature)}
+              />
+              <label htmlFor={`feature-${feature}`} className="text-sm">
+                {feature}
+              </label>
+            </div>
           ))}
         </div>
       </div>
