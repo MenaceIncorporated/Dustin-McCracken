@@ -91,8 +91,7 @@ export default function SearchByMap() {
 
   const filteredProperties = sampleProperties.filter(property => {
     const matchesSearch = 
-      property.address.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      property.type.toLowerCase().includes(searchQuery.toLowerCase())
+      property.address.toLowerCase().includes(searchQuery.toLowerCase())
 
     const matchesPrice = 
       parseInt(property.price.replace(/[^0-9]/g, '')) >= filters.priceRange[0] &&
@@ -107,8 +106,7 @@ export default function SearchByMap() {
       filters.baths.includes(property.baths)
 
     const matchesType = 
-      filters.propertyTypes.length === 0 || 
-      filters.propertyTypes.includes(property.type)
+      filters.propertyTypes.length === 0
 
     return matchesSearch && matchesPrice && matchesBeds && matchesBaths && matchesType
   })
