@@ -36,7 +36,7 @@ const programs = [
   {
     id: 5,
     title: 'Down Payment Assistance Program',
-    description: 'Learn about various down payment assistance options available to qualified buyers. We'll help you understand the requirements and guide you through the application process.',
+    description: "Learn about various down payment assistance options available to qualified buyers. We'll help you understand the requirements and guide you through the application process.",
     videoUrl: 'https://www.youtube.com/embed/example5',
     thumbnailUrl: 'https://picsum.photos/seed/program5/800/450',
   },
