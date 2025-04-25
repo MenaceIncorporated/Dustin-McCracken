@@ -9,29 +9,29 @@ const sampleProperties = [
   {
     id: 1,
     imageUrl: 'https://picsum.photos/seed/property1/800/600',
-    title: 'Modern Family Home',
     price: 750000,
-    bedrooms: 4,
-    bathrooms: 3,
-    location: '123 Main St, Anytown, CA'
+    address: '123 Main St, Anytown, CA',
+    beds: 4,
+    baths: 3,
+    sqft: 2500
   },
   {
     id: 2,
     imageUrl: 'https://picsum.photos/seed/property2/800/600',
-    title: 'Luxury Condo',
     price: 950000,
-    bedrooms: 3,
-    bathrooms: 2,
-    location: '456 Oak Ave, Somewhere, CA'
+    address: '456 Oak Ave, Somewhere, CA',
+    beds: 3,
+    baths: 2,
+    sqft: 2000
   },
   {
     id: 3,
     imageUrl: 'https://picsum.photos/seed/property3/800/600',
-    title: 'Cozy Townhouse',
     price: 550000,
-    bedrooms: 2,
-    bathrooms: 2,
-    location: '789 Pine Rd, Anywhere, CA'
+    address: '789 Pine Rd, Anywhere, CA',
+    beds: 2,
+    baths: 2,
+    sqft: 1500
   }
 ]
 
@@ -63,12 +63,14 @@ export default function Home() {
             {sampleProperties.map((property) => (
               <PropertyCard
                 key={property.id}
+                id={property.id}
                 imageUrl={property.imageUrl}
-                title={property.title}
                 price={property.price}
-                bedrooms={property.bedrooms}
-                bathrooms={property.bathrooms}
-                location={property.location}
+                address={property.address}
+                beds={property.beds}
+                baths={property.baths}
+                sqft={property.sqft}
+                onClick={() => {}}
               />
             ))}
           </div>
