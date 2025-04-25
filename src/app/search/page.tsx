@@ -8,34 +8,31 @@ import PropertyCard from '@/components/features/PropertyCard'
 // Sample data - replace with actual API data
 const sampleProperties = [
   {
-    id: '1',
+    id: 1,
     imageUrl: 'https://picsum.photos/seed/property1/800/600',
     price: '$750,000',
-    address: '123 Main St, Anytown, CA 90210',
+    address: '123 Main St, Anytown, CA',
     beds: 4,
     baths: 3,
-    sqft: 2500,
-    type: 'Single Family'
+    sqft: 2500
   },
   {
-    id: '2',
+    id: 2,
     imageUrl: 'https://picsum.photos/seed/property2/800/600',
-    price: '$625,000',
-    address: '456 Oak Ave, Somewhere, CA 90211',
+    price: '$950,000',
+    address: '456 Oak Ave, Somewhere, CA',
     beds: 3,
     baths: 2,
-    sqft: 1800,
-    type: 'Condo'
+    sqft: 2000
   },
   {
-    id: '3',
+    id: 3,
     imageUrl: 'https://picsum.photos/seed/property3/800/600',
-    price: '$895,000',
-    address: '789 Pine St, Elsewhere, CA 90212',
-    beds: 5,
-    baths: 4,
-    sqft: 3200,
-    type: 'Single Family'
+    price: '$550,000',
+    address: '789 Pine Rd, Anywhere, CA',
+    beds: 2,
+    baths: 2,
+    sqft: 1500
   },
   {
     id: '4',
