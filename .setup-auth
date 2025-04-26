@@ -1,0 +1,131 @@
+#!/bin/bash
+
+# Exit on error
+set -e
+
+echo "Setting up authentication..."
+
+# Install required dependencies
+echo "Installing dependencies..."
+npm install @supabase/ssr @supabase/supabase-js @supabase/auth-ui-react @supabase/auth-ui-shared
+
+# Create auth-related directories and files
+echo "Creating auth structure..."
+mkdir -p src/app/auth/signin
+mkdir -p src/app/auth/callback
+mkdir -p src/contexts
+
+# Create auth pages
+cat > src/app/auth/signin/page.tsx << 'EOL'
+import { Auth } from '@supabase/auth-ui-react'
+import { ThemeSupa } from '@supabase/auth-ui-shared'
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+import { useRouter } from 'next/navigation'
+
+export default function SignIn() {
+  const router = useRouter()
+  const supabase = createClientComponentClient()
+
+  return (
+    <div className="flex min-h-screen items-center justify-center">
+      <div className="w-full max-w-md space-y-8 rounded-lg bg-white p-6 shadow-lg">
+        <div>
+          <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
+            Sign in to your account
+          </h2>
+        </div>
+        <Auth
+          supabaseClient={supabase}
+          appearance={{ theme: ThemeSupa }}
+          theme="light"
+          providers={['google']}
+          redirectTo={`${window.location.origin}/auth/callback`}
+        />
+      </div>
+    </div>
+  )
+}
+EOL
+
+cat > src/app/auth/callback/route.ts << 'EOL'
+import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs'
+import { cookies } from 'next/headers'
+import { NextResponse } from 'next/server'
+
+export async function GET(request: Request) {
+  const requestUrl = new URL(request.url)
+  const code = requestUrl.searchParams.get('code')
+
+  if (code) {
+    const supabase = createRouteHandlerClient({ cookies })
+    await supabase.auth.exchangeCodeForSession(code)
+  }
+
+  return NextResponse.redirect(requestUrl.origin)
+}
+EOL
+
+# Create auth context
+cat > src/contexts/AuthContext.tsx << 'EOL'
+import { createContext, useContext, useEffect, useState } from 'react'
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+import { useRouter } from 'next/navigation'
+import { Session, User } from '@supabase/supabase-js'
+
+type AuthContextType = {
+  user: User | null
+  session: Session | null
+  signOut: () => Promise<void>
+}
+
+const AuthContext = createContext<AuthContextType>({
+  user: null,
+  session: null,
+  signOut: async () => {},
+})
+
+export function AuthProvider({ children }: { children: React.ReactNode }) {
+  const [user, setUser] = useState<User | null>(null)
+  const [session, setSession] = useState<Session | null>(null)
+  const router = useRouter()
+  const supabase = createClientComponentClient()
+
+  useEffect(() => {
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session)
+      setUser(session?.user ?? null)
+    })
+
+    return () => subscription.unsubscribe()
+  }, [supabase])
+
+  const signOut = async () => {
+    await supabase.auth.signOut()
+    router.refresh()
+  }
+
+  return (
+    <AuthContext.Provider value={{ user, session, signOut }}>
+      {children}
+    </AuthContext.Provider>
+  )
+}
+
+export const useAuth = () => useContext(AuthContext)
+EOL
+
+# Create .env.local template
+cat > .env.local.example << 'EOL'
+# Supabase Configuration
+NEXT_PUBLIC_SUPABASE_URL=your-project-url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+EOL
+
+echo "Authentication setup complete!"
+echo "Please:"
+echo "1. Create a Supabase project at https://supabase.com"
+echo "2. Copy your project URL and anon key to .env.local"
+echo "3. Enable Google OAuth in your Supabase project settings"
+echo "4. Add your domain to the allowed redirect URLs in Supabase" 
