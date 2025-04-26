@@ -1,63 +1,97 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Header from '@/components/layout/Header'
+import { Button } from '@/components/ui/button'
 import MortgageCalculator from '@/components/features/MortgageCalculator'
 import ContactForm from '@/components/features/ContactForm'
 
-// Mock data - in a real app, this would come from an API
-const property = {
-  id: 1,
-  imageUrl: 'https://picsum.photos/seed/property1/1200/800',
-  additionalImages: [
-    'https://picsum.photos/seed/property1-2/800/600',
-    'https://picsum.photos/seed/property1-3/800/600',
-    'https://picsum.photos/seed/property1-4/800/600',
-  ],
-  price: 750000,
-  address: '123 Main St, Anytown, CA',
-  beds: 4,
-  baths: 3,
-  sqft: 2500,
-  type: 'Single Family',
-  status: 'For Sale',
-  yearBuilt: 2020,
-  features: [
-    'Pool',
-    'Garage',
-    'Updated Kitchen',
-    'Central Air',
-    'Hardwood Floors',
-    'Fireplace',
-    'Walk-in Closets',
-    'Master Suite',
-    'Patio'
-  ],
-  description: `
-    Beautiful single-family home in a prime location. This stunning property features an open floor plan,
-    gourmet kitchen with stainless steel appliances, and hardwood floors throughout. The spacious master
-    suite includes a walk-in closet and luxurious bathroom. The backyard offers a private pool and patio
-    perfect for entertaining.
-    
-    Recent updates include a new roof, HVAC system, and kitchen appliances. Located in a highly-rated
-    school district and close to shopping, dining, and major highways.
-  `,
-  details: {
-    'Property Type': 'Single Family',
-    'Year Built': '2020',
-    'Heating': 'Central',
-    'Cooling': 'Central',
-    'Parking': '2 Car Garage',
-    'Lot Size': '0.25 Acres',
-    'School District': 'Anytown USD',
-    'HOA': 'None'
+// This should match the properties data structure from buy/page.tsx and home page
+const properties = [
+  {
+    id: 1,
+    imageUrl: 'https://picsum.photos/seed/property1/800/600',
+    price: 750000,
+    address: '123 Main St, Anytown, CA',
+    beds: 4,
+    baths: 3,
+    sqft: 2500,
+    type: 'Single Family',
+    status: 'For Sale',
+    yearBuilt: 2020,
+    features: ['Pool', 'Garage', 'Updated Kitchen']
+  },
+  {
+    id: 2,
+    imageUrl: 'https://picsum.photos/seed/property2/800/600',
+    price: 950000,
+    address: '456 Oak Ave, Somewhere, CA',
+    beds: 3,
+    baths: 2,
+    sqft: 2000,
+    type: 'Townhouse',
+    status: 'For Sale',
+    yearBuilt: 2019,
+    features: ['Balcony', 'Smart Home', 'Hardwood Floors']
+  },
+  {
+    id: 3,
+    imageUrl: 'https://picsum.photos/seed/property3/800/600',
+    price: 550000,
+    address: '789 Pine Rd, Anywhere, CA',
+    beds: 2,
+    baths: 2,
+    sqft: 1500,
+    type: 'Condo',
+    status: 'For Sale',
+    yearBuilt: 2021,
+    features: ['Gym', 'Parking', 'Security']
   }
+]
+
+interface Property {
+  id: number
+  imageUrl: string
+  price: number
+  address: string
+  beds: number
+  baths: number
+  sqft: number
+  type: string
+  status: string
+  yearBuilt: number
+  features: string[]
 }
 
 export default function PropertyPage({ params }: { params: { id: string } }) {
-  const [selectedImage, setSelectedImage] = useState(property.imageUrl)
+  const [property, setProperty] = useState<Property | null>(null)
+  const [selectedImage, setSelectedImage] = useState(property?.imageUrl || '')
   const [showContactForm, setShowContactForm] = useState(false)
+
+  useEffect(() => {
+    // Find the property with the matching ID
+    const foundProperty = properties.find(p => p.id === parseInt(params.id))
+    setProperty(foundProperty || null)
+  }, [params.id])
+
+  if (!property) {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        <Header />
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="text-center">
+            <h1 className="text-2xl font-bold text-gray-900">
+              Property not found
+            </h1>
+            <p className="mt-2 text-gray-600">
+              The property you're looking for doesn't exist or has been removed.
+            </p>
+          </div>
+        </main>
+      </div>
+    )
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -117,21 +151,6 @@ export default function PropertyPage({ params }: { params: { id: string } }) {
                     className="object-cover"
                   />
                 </button>
-                {property.additionalImages.map((img, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setSelectedImage(img)}
-                    className="relative h-20 rounded-lg overflow-hidden"
-                    title={`View property image ${index + 2}`}
-                  >
-                    <Image
-                      src={img}
-                      alt={`${property.address} - ${index + 2}`}
-                      fill
-                      className="object-cover"
-                    />
-                  </button>
-                ))}
               </div>
             </div>
 
