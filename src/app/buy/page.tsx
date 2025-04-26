@@ -247,7 +247,6 @@ export default function BuyPage() {
                 <PropertyCard
                   key={property.id}
                   {...property}
-                  onClick={() => console.log('Property clicked:', property.id)}
                 />
               ))}
             </div>

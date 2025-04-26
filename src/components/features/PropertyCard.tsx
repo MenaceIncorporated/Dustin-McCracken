@@ -1,6 +1,7 @@
 'use client'
 
 import Image from 'next/image'
+import Link from 'next/link'
 
 interface PropertyCardProps {
   id: number
@@ -14,7 +15,6 @@ interface PropertyCardProps {
   status?: string
   yearBuilt?: number
   features?: string[]
-  onClick?: () => void
 }
 
 export default function PropertyCard({
@@ -28,13 +28,12 @@ export default function PropertyCard({
   type,
   status,
   yearBuilt,
-  features,
-  onClick
+  features
 }: PropertyCardProps) {
   return (
-    <div 
-      className="bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer hover:shadow-xl transition-shadow duration-200"
-      onClick={onClick}
+    <Link 
+      href={`/properties/${id}`}
+      className="block bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer hover:shadow-xl transition-shadow duration-200"
     >
       <div className="relative h-48 md:h-64">
         <Image
@@ -99,6 +98,6 @@ export default function PropertyCard({
           </div>
         )}
       </div>
-    </div>
+    </Link>
   )
 } 
