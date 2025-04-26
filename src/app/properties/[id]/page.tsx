@@ -97,122 +97,102 @@ export default function PropertyPage({ params }: { params: { id: string } }) {
     <div className="min-h-screen bg-gray-50">
       <Header />
       
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Property Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            {property.address}
-          </h1>
-          <p className="text-2xl font-bold text-primary mb-4">
-            ${property.price.toLocaleString()}
-          </p>
-          <div className="flex items-center gap-4 text-gray-600">
-            <span className="flex items-center">
-              <span className="mr-1">🛏️</span>
-              {property.beds} beds
-            </span>
-            <span className="flex items-center">
-              <span className="mr-1">🚿</span>
-              {property.baths} baths
-            </span>
-            <span className="flex items-center">
-              <span className="mr-1">📏</span>
-              {property.sqft.toLocaleString()} sqft
-            </span>
-            <span className="bg-primary text-white px-3 py-1 rounded-full text-sm">
-              {property.status}
-            </span>
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+          {/* Property Images */}
+          <div className="relative h-96">
+            <Image
+              src={selectedImage}
+              alt={property.address}
+              fill
+              className="object-cover"
+            />
+            <div className="absolute top-4 left-4">
+              <span className="bg-primary text-white px-4 py-2 rounded-full text-sm font-medium">
+                {property.status}
+              </span>
+            </div>
           </div>
-        </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Main Content */}
-          <div className="lg:col-span-2 space-y-8">
-            {/* Image Gallery */}
-            <div className="space-y-4">
-              <div className="relative h-[400px] rounded-lg overflow-hidden">
-                <Image
-                  src={selectedImage}
-                  alt={property.address}
-                  fill
-                  className="object-cover"
-                />
+          {/* Property Details */}
+          <div className="p-8">
+            <div className="flex justify-between items-start mb-6">
+              <div>
+                <h1 className="text-3xl font-bold text-gray-900 mb-2">
+                  ${property.price.toLocaleString()}
+                </h1>
+                <p className="text-xl text-gray-600">{property.address}</p>
               </div>
-              <div className="grid grid-cols-4 gap-4">
-                <button
-                  onClick={() => setSelectedImage(property.imageUrl)}
-                  className="relative h-20 rounded-lg overflow-hidden"
-                  title="View main property image"
-                >
-                  <Image
-                    src={property.imageUrl}
-                    alt={property.address}
-                    fill
-                    className="object-cover"
-                  />
-                </button>
+              <span className="bg-gray-100 text-gray-800 px-4 py-2 rounded-full text-sm font-medium">
+                {property.type}
+              </span>
+            </div>
+
+            {/* Key Features */}
+            <div className="grid grid-cols-3 gap-6 mb-8 p-6 bg-gray-50 rounded-lg">
+              <div className="text-center">
+                <span className="block text-2xl font-bold text-gray-900">
+                  {property.beds}
+                </span>
+                <span className="text-gray-600">Beds</span>
+              </div>
+              <div className="text-center">
+                <span className="block text-2xl font-bold text-gray-900">
+                  {property.baths}
+                </span>
+                <span className="text-gray-600">Baths</span>
+              </div>
+              <div className="text-center">
+                <span className="block text-2xl font-bold text-gray-900">
+                  {property.sqft.toLocaleString()}
+                </span>
+                <span className="text-gray-600">Square Feet</span>
+              </div>
+            </div>
+
+            {/* Additional Details */}
+            <div className="mb-8">
+              <h2 className="text-xl font-bold text-gray-900 mb-4">
+                Property Details
+              </h2>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <span className="text-gray-600">Year Built:</span>
+                  <span className="ml-2 text-gray-900">{property.yearBuilt}</span>
+                </div>
+                <div>
+                  <span className="text-gray-600">Property Type:</span>
+                  <span className="ml-2 text-gray-900">{property.type}</span>
+                </div>
               </div>
             </div>
 
             {/* Features */}
-            <div className="bg-white rounded-lg shadow-lg p-6">
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">
+            <div className="mb-8">
+              <h2 className="text-xl font-bold text-gray-900 mb-4">
                 Features
               </h2>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                {property.features.map((feature) => (
-                  <div
+              <div className="flex flex-wrap gap-2">
+                {property.features.map(feature => (
+                  <span
                     key={feature}
-                    className="flex items-center text-gray-600"
+                    className="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm"
                   >
-                    <span className="mr-2">✓</span>
                     {feature}
-                  </div>
+                  </span>
                 ))}
               </div>
             </div>
 
-            {/* Property Details */}
-            <div className="bg-white rounded-lg shadow-lg p-6">
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">
-                Property Details
-              </h2>
-              <div className="grid grid-cols-2 gap-4">
-                {Object.entries(property.details).map(([key, value]) => (
-                  <div key={key} className="flex justify-between">
-                    <span className="text-gray-600">{key}</span>
-                    <span className="font-medium">{value}</span>
-                  </div>
-                ))}
-              </div>
+            {/* Contact Buttons */}
+            <div className="flex gap-4">
+              <Button className="flex-1">
+                Schedule a Tour
+              </Button>
+              <Button variant="outline" className="flex-1">
+                Contact Agent
+              </Button>
             </div>
-          </div>
-
-          {/* Sidebar */}
-          <div className="space-y-6">
-            {/* Contact Form */}
-            <div className="bg-white rounded-lg shadow-lg p-6">
-              <h2 className="text-xl font-bold text-gray-900 mb-4">
-                Interested in this property?
-              </h2>
-              <button
-                onClick={() => setShowContactForm(true)}
-                className="w-full bg-primary text-white py-2 px-4 rounded-md hover:bg-primary-dark transition-colors duration-200"
-              >
-                Schedule a Showing
-              </button>
-              {showContactForm && (
-                <div className="mt-4">
-                  <ContactForm 
-                    subject={`Showing Request: ${property.address}`}
-                    message={`I'm interested in scheduling a showing for ${property.address}`}
-                  />
-                </div>
-              )}
-            </div>
-
-            {/* Mortgage Calculator */}
-            <MortgageCalculator defaultPrice={property.price} />
           </div>
         </div>
       </main>
