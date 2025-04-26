@@ -6,73 +6,18 @@ import Header from '@/components/layout/Header'
 import { Button } from '@/components/ui/button'
 import MortgageCalculator from '@/components/features/MortgageCalculator'
 import ContactForm from '@/components/features/ContactForm'
-
-// This should match the properties data structure from buy/page.tsx and home page
-const properties = [
-  {
-    id: 1,
-    imageUrl: 'https://picsum.photos/seed/property1/800/600',
-    price: 750000,
-    address: '123 Main St, Anytown, CA',
-    beds: 4,
-    baths: 3,
-    sqft: 2500,
-    type: 'Single Family',
-    status: 'For Sale',
-    yearBuilt: 2020,
-    features: ['Pool', 'Garage', 'Updated Kitchen']
-  },
-  {
-    id: 2,
-    imageUrl: 'https://picsum.photos/seed/property2/800/600',
-    price: 950000,
-    address: '456 Oak Ave, Somewhere, CA',
-    beds: 3,
-    baths: 2,
-    sqft: 2000,
-    type: 'Townhouse',
-    status: 'For Sale',
-    yearBuilt: 2019,
-    features: ['Balcony', 'Smart Home', 'Hardwood Floors']
-  },
-  {
-    id: 3,
-    imageUrl: 'https://picsum.photos/seed/property3/800/600',
-    price: 550000,
-    address: '789 Pine Rd, Anywhere, CA',
-    beds: 2,
-    baths: 2,
-    sqft: 1500,
-    type: 'Condo',
-    status: 'For Sale',
-    yearBuilt: 2021,
-    features: ['Gym', 'Parking', 'Security']
-  }
-]
-
-interface Property {
-  id: number
-  imageUrl: string
-  price: number
-  address: string
-  beds: number
-  baths: number
-  sqft: number
-  type: string
-  status: string
-  yearBuilt: number
-  features: string[]
-}
+import { Property, properties } from '@/data/properties'
 
 export default function PropertyPage({ params }: { params: { id: string } }) {
   const [property, setProperty] = useState<Property | null>(null)
-  const [selectedImage, setSelectedImage] = useState(property?.imageUrl || '')
   const [showContactForm, setShowContactForm] = useState(false)
 
   useEffect(() => {
     // Find the property with the matching ID
     const foundProperty = properties.find(p => p.id === parseInt(params.id))
-    setProperty(foundProperty || null)
+    if (foundProperty) {
+      setProperty(foundProperty)
+    }
   }, [params.id])
 
   if (!property) {
@@ -102,7 +47,7 @@ export default function PropertyPage({ params }: { params: { id: string } }) {
           {/* Property Images */}
           <div className="relative h-96">
             <Image
-              src={selectedImage}
+              src={property.imageUrl}
               alt={property.address}
               fill
               className="object-cover"
@@ -186,14 +131,31 @@ export default function PropertyPage({ params }: { params: { id: string } }) {
 
             {/* Contact Buttons */}
             <div className="flex gap-4">
-              <Button className="flex-1">
+              <Button 
+                className="flex-1"
+                onClick={() => setShowContactForm(true)}
+              >
                 Schedule a Tour
               </Button>
-              <Button variant="outline" className="flex-1">
+              <Button 
+                variant="outline" 
+                className="flex-1"
+                onClick={() => setShowContactForm(true)}
+              >
                 Contact Agent
               </Button>
             </div>
+
+            {showContactForm && (
+              <div className="mt-8">
+                <ContactForm onClose={() => setShowContactForm(false)} />
+              </div>
+            )}
           </div>
+        </div>
+
+        <div className="mt-12">
+          <MortgageCalculator propertyPrice={property.price} />
         </div>
       </main>
     </div>
