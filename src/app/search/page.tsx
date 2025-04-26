@@ -49,7 +49,7 @@ const sampleProperties = [
   }
 ]
 
-export default function Search() {
+export default function SearchPage() {
   const [searchQuery, setSearchQuery] = useState('')
   const [showFilters, setShowFilters] = useState(false)
   const [filters, setFilters] = useState({
@@ -70,9 +70,10 @@ export default function Search() {
       property.address.toLowerCase().includes(searchQuery.toLowerCase()) ||
       property.type.toLowerCase().includes(searchQuery.toLowerCase())
 
+    const propertyPrice = parseInt(property.price.replace(/[^0-9]/g, ''))
     const matchesPrice = 
-      property.price.replace(/[^0-9]/g, '') >= filters.priceRange[0] &&
-      property.price.replace(/[^0-9]/g, '') <= filters.priceRange[1]
+      propertyPrice >= filters.priceRange[0] &&
+      propertyPrice <= filters.priceRange[1]
 
     const matchesBeds = 
       filters.beds.length === 0 || 
@@ -131,43 +132,32 @@ export default function Search() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          {/* Filters Sidebar */}
-          <div className="lg:col-span-1">
-            <div className="bg-white rounded-lg shadow p-6">
-              <SearchFilters onApply={handleApplyFilters} />
-            </div>
-          </div>
-
-          {/* Property Listings */}
-          <div className="lg:col-span-3">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {filteredProperties.map((property) => (
-                <PropertyCard
-                  key={property.id}
-                  id={property.id}
-                  imageUrl={property.imageUrl}
-                  price={property.price}
-                  address={property.address}
-                  beds={property.beds}
-                  baths={property.baths}
-                  sqft={property.sqft}
-                />
-              ))}
-            </div>
-
-            {filteredProperties.length === 0 && (
-              <div className="text-center py-12">
-                <p className="text-lg text-gray-600">
-                  No properties found matching your criteria
-                </p>
-                <p className="text-sm text-gray-500 mt-2">
-                  Try adjusting your search or filters
-                </p>
-              </div>
-            )}
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {filteredProperties.map((property) => (
+            <PropertyCard
+              key={property.id}
+              id={parseInt(property.id)}
+              imageUrl={property.imageUrl}
+              price={parseInt(property.price.replace(/[^0-9]/g, ''))}
+              address={property.address}
+              beds={property.beds}
+              baths={property.baths}
+              sqft={property.sqft}
+              onClick={() => {}}
+            />
+          ))}
         </div>
+
+        {filteredProperties.length === 0 && (
+          <div className="text-center py-12">
+            <p className="text-lg text-gray-600">
+              No properties found matching your criteria
+            </p>
+            <p className="text-sm text-gray-500 mt-2">
+              Try adjusting your filters or search query
+            </p>
+          </div>
+        )}
       </div>
 
       {/* Filters Modal */}

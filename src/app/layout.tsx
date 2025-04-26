@@ -17,8 +17,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={inter.variable}>
-      <body className={inter.className}>
+    <html lang="en" className={`${inter.variable} antialiased`}>
+      <body className={`${inter.className} min-h-screen bg-background`}>
         <AuthProvider>
           {children}
         </AuthProvider>

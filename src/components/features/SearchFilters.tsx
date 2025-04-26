@@ -23,6 +23,10 @@ export default function SearchFilters({ onApply }: SearchFiltersProps) {
   const [propertyTypes, setPropertyTypes] = useState<string[]>([])
   const [features, setFeatures] = useState<string[]>([])
 
+  const handlePriceRangeChange = (value: number[]) => {
+    setPriceRange([value[0], value[1]])
+  }
+
   const handleBedChange = (value: number) => {
     setBeds(prev => 
       prev.includes(value) 
@@ -71,8 +75,9 @@ export default function SearchFilters({ onApply }: SearchFiltersProps) {
       <div>
         <h3 className="text-lg font-medium text-gray-900 mb-4">Price Range</h3>
         <Slider
+          defaultValue={priceRange}
           value={priceRange}
-          onValueChange={setPriceRange}
+          onValueChange={handlePriceRangeChange}
           min={0}
           max={2000000}
           step={10000}

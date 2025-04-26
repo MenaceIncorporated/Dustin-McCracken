@@ -44,12 +44,26 @@ export default function SearchForm({ onSubmit }: SearchFormProps) {
     onSubmit(filters)
   }
 
-  const handleCheckboxChange = (category: keyof SearchFilters, value: string) => {
+  const handleCheckboxChange = (category: keyof SearchFilters, value: string | number) => {
+    setFilters(prev => {
+      const currentValue = prev[category]
+      if (Array.isArray(currentValue)) {
+        const stringValue = String(value)
+        return {
+          ...prev,
+          [category]: currentValue.includes(stringValue)
+            ? currentValue.filter(v => v !== stringValue)
+            : [...currentValue, stringValue]
+        }
+      }
+      return prev
+    })
+  }
+
+  const handleSliderChange = (category: keyof SearchFilters, value: number[]) => {
     setFilters(prev => ({
       ...prev,
-      [category]: prev[category].includes(value)
-        ? prev[category].filter(v => v !== value)
-        : [...prev[category], value]
+      [category]: [value[0], value[1]] as [number, number]
     }))
   }
 
@@ -110,11 +124,12 @@ export default function SearchForm({ onSubmit }: SearchFormProps) {
       <div className="space-y-4">
         <h3 className="text-lg font-medium">Price Range</h3>
         <Slider
+          defaultValue={filters.priceRange}
           value={filters.priceRange}
           min={0}
           max={2000000}
           step={10000}
-          onValueChange={(value) => setFilters(prev => ({ ...prev, priceRange: value as [number, number] }))}
+          onValueChange={(value) => handleSliderChange('priceRange', value)}
         />
         <div className="flex justify-between text-sm text-[#666666]">
           <span>${filters.priceRange[0].toLocaleString()}</span>
@@ -132,7 +147,7 @@ export default function SearchForm({ onSubmit }: SearchFormProps) {
                 <Checkbox
                   id={`beds-${beds}`}
                   checked={filters.beds.includes(Number(beds))}
-                  onCheckedChange={() => handleCheckboxChange('beds', String(beds))}
+                  onCheckedChange={() => handleCheckboxChange('beds', beds)}
                 />
                 <label htmlFor={`beds-${beds}`} className="text-sm">{beds}</label>
               </div>
@@ -148,7 +163,7 @@ export default function SearchForm({ onSubmit }: SearchFormProps) {
                 <Checkbox
                   id={`baths-${baths}`}
                   checked={filters.baths.includes(Number(baths))}
-                  onCheckedChange={() => handleCheckboxChange('baths', String(baths))}
+                  onCheckedChange={() => handleCheckboxChange('baths', baths)}
                 />
                 <label htmlFor={`baths-${baths}`} className="text-sm">{baths}</label>
               </div>
@@ -161,11 +176,12 @@ export default function SearchForm({ onSubmit }: SearchFormProps) {
       <div className="space-y-4">
         <h3 className="text-lg font-medium">Square Footage</h3>
         <Slider
+          defaultValue={filters.sqftRange}
           value={filters.sqftRange}
           min={0}
           max={5000}
           step={100}
-          onValueChange={(value) => setFilters(prev => ({ ...prev, sqftRange: value as [number, number] }))}
+          onValueChange={(value) => handleSliderChange('sqftRange', value)}
         />
         <div className="flex justify-between text-sm text-[#666666]">
           <span>{filters.sqftRange[0].toLocaleString()} sqft</span>
@@ -177,11 +193,12 @@ export default function SearchForm({ onSubmit }: SearchFormProps) {
       <div className="space-y-4">
         <h3 className="text-lg font-medium">Year Built</h3>
         <Slider
+          defaultValue={filters.yearBuilt}
           value={filters.yearBuilt}
           min={1900}
           max={2024}
           step={1}
-          onValueChange={(value) => setFilters(prev => ({ ...prev, yearBuilt: value as [number, number] }))}
+          onValueChange={(value) => handleSliderChange('yearBuilt', value)}
         />
         <div className="flex justify-between text-sm text-[#666666]">
           <span>{filters.yearBuilt[0]}</span>
@@ -206,11 +223,9 @@ export default function SearchForm({ onSubmit }: SearchFormProps) {
         </div>
       </div>
 
-      <div className="pt-4">
-        <Button type="submit" className="w-full">
-          Search Properties
-        </Button>
-      </div>
+      <Button type="submit" className="w-full">
+        Apply Filters
+      </Button>
     </form>
   )
 } 

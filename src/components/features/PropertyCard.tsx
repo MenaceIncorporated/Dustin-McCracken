@@ -1,16 +1,9 @@
 'use client'
 
 import Image from 'next/image'
-import { Bed, Bath, Ruler, BedDouble, Maximize2 } from 'lucide-react'
+import { Property } from '@/types/property'
 
-interface PropertyCardProps {
-  id: number
-  imageUrl: string
-  price: string
-  address: string
-  beds: number
-  baths: number
-  sqft: number
+interface PropertyCardProps extends Property {
   isActive?: boolean
   onClick: () => void
 }
@@ -23,44 +16,41 @@ export default function PropertyCard({
   beds,
   baths,
   sqft,
-  isActive = false,
+  isActive,
   onClick
 }: PropertyCardProps) {
   return (
     <div
-      onClick={onClick}
-      className={`bg-white rounded-lg shadow-md overflow-hidden cursor-pointer transform transition-transform duration-200 hover:scale-[1.02] ${
-        isActive ? 'ring-2 ring-[#E31837]' : ''
+      className={`bg-white rounded-lg shadow-md overflow-hidden transition-all duration-200 ${
+        isActive ? 'ring-2 ring-primary' : ''
       }`}
+      onClick={onClick}
     >
       <div className="relative h-48">
         <Image
           src={imageUrl}
-          alt={`Property at ${address}`}
+          alt={address}
           fill
           className="object-cover"
         />
       </div>
-      
       <div className="p-4">
-        <div className="text-[#E31837] font-bold text-xl mb-2">
-          {price}
+        <div className="text-xl font-semibold text-gray-900">
+          ${price.toLocaleString()}
         </div>
-        
-        <div className="text-gray-700 mb-2">{address}</div>
-        
-        <div className="flex justify-between text-gray-600">
+        <div className="text-sm text-gray-600 mt-1">{address}</div>
+        <div className="flex items-center space-x-4 mt-4 text-sm text-gray-600">
           <div className="flex items-center">
-            <BedDouble className="w-5 h-5 mr-1" />
-            <span>{beds}</span>
+            <span className="mr-1">🛏️</span>
+            {beds} {beds === 1 ? 'Bed' : 'Beds'}
           </div>
           <div className="flex items-center">
-            <Bath className="w-5 h-5 mr-1" />
-            <span>{baths}</span>
+            <span className="mr-1">🚿</span>
+            {baths} {baths === 1 ? 'Bath' : 'Baths'}
           </div>
           <div className="flex items-center">
-            <Maximize2 className="w-5 h-5 mr-1" />
-            <span>{sqft.toLocaleString()} sqft</span>
+            <span className="mr-1">📏</span>
+            {sqft.toLocaleString()} sqft
           </div>
         </div>
       </div>

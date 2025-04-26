@@ -30,6 +30,10 @@ export default function Filters({ onApply, onClose }: FiltersProps) {
     })
   }
 
+  const handlePriceRangeChange = (value: number[]) => {
+    setPriceRange([value[0], value[1]])
+  }
+
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
       <div className="bg-white rounded-lg p-6 w-full max-w-md">
@@ -40,8 +44,9 @@ export default function Filters({ onApply, onClose }: FiltersProps) {
           <div>
             <h3 className="font-medium mb-2">Price Range</h3>
             <Slider
+              defaultValue={priceRange}
               value={priceRange}
-              onValueChange={setPriceRange}
+              onValueChange={handlePriceRangeChange}
               min={0}
               max={2000000}
               step={10000}
