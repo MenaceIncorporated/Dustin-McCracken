@@ -7,9 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "vercel-build": "npm install --legacy-peer-deps && npm install leaflet && next build"
+    "vercel-build": "next build"
   },
   "dependencies": {
+    "\"@tailwindcss/forms\"": "0.5.10",
     "@headlessui/react": "^2.2.2",
     "@radix-ui/react-checkbox": "^1.2.3",
     "@radix-ui/react-slider": "^1.3.2",
