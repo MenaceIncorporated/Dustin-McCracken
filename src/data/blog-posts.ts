@@ -43,9 +43,9 @@ Looking ahead, we expect to see continued stabilization in prices and potentiall
   },
   {
     id: 2,
-    title: 'Maximizing Your Home's Value: Pre-Sale Improvements',
+    title: 'Maximizing Your Home\'s Value: Pre-Sale Improvements',
     slug: 'maximizing-home-value-improvements',
-    excerpt: 'Discover the most effective home improvements that can significantly increase your property's value before selling.',
+    excerpt: 'Discover the most effective home improvements that can significantly increase your property\'s value before selling.',
     content: `When preparing to sell your home, strategic improvements can make a substantial difference in your final sale price. Here's our comprehensive guide:
 
 High-ROI Improvements
@@ -72,7 +72,7 @@ Remember, not all improvements offer equal return on investment...`,
   },
   {
     id: 3,
-    title: 'First-Time Homebuyer's Guide 2024',
+    title: 'First-Time Homebuyer\'s Guide 2024',
     slug: 'first-time-homebuyer-guide-2024',
     excerpt: 'Everything you need to know about buying your first home in 2024, from financing to closing.',
     content: `Buying your first home can seem overwhelming, but we're here to break it down into manageable steps:

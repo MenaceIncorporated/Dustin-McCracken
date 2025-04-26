@@ -65,7 +65,7 @@ const sellingSteps = [
 const resources = [
   {
     title: 'Home Value Estimator',
-    description: 'Get an instant estimate of your home's current market value',
+    description: 'Get an instant estimate of your home\'s current market value',
     link: '/instant-home-value',
     icon: (
       <svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
