@@ -1,31 +1,10 @@
 'use client'
 
 import Image from 'next/image'
-import { Property } from '@/types/property'
 
-interface PropertyCardProps extends Property {
-  isActive?: boolean
-  onClick: () => void
-}
-
-export default function PropertyCard({
-  id,
-  imageUrl,
-  price,
-  address,
-  beds,
-  baths,
-  sqft,
-  isActive,
-  onClick
-}: PropertyCardProps) {
+export default function PropertyCard({ imageUrl, price, address, beds, baths, sqft }) {
   return (
-    <div
-      className={`bg-white rounded-lg shadow-md overflow-hidden transition-all duration-200 ${
-        isActive ? 'ring-2 ring-primary' : ''
-      }`}
-      onClick={onClick}
-    >
+    <div className="bg-white rounded-lg shadow-md overflow-hidden">
       <div className="relative h-48">
         <Image
           src={imageUrl}
@@ -42,15 +21,15 @@ export default function PropertyCard({
         <div className="flex items-center space-x-4 mt-4 text-sm text-gray-600">
           <div className="flex items-center">
             <span className="mr-1">🛏️</span>
-            {beds} {beds === 1 ? 'Bed' : 'Beds'}
+            {beds} Beds
           </div>
           <div className="flex items-center">
             <span className="mr-1">🚿</span>
-            {baths} {baths === 1 ? 'Bath' : 'Baths'}
+            {baths} Baths
           </div>
           <div className="flex items-center">
             <span className="mr-1">📏</span>
-            {sqft.toLocaleString()} sqft
+            {sqft} sqft
           </div>
         </div>
       </div>
