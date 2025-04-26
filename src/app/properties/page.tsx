@@ -1,9 +1,65 @@
+'use client'
+
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import Header from '@/components/layout/Header'
-import { properties } from '@/data/properties'
+import { Property, properties } from '@/data/properties'
 
 export default function PropertiesPage() {
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+  const [loadedProperties, setLoadedProperties] = useState<Property[]>([])
+
+  useEffect(() => {
+    try {
+      setLoadedProperties(properties)
+      setIsLoading(false)
+    } catch (err) {
+      setError('Failed to load properties')
+      setIsLoading(false)
+    }
+  }, [])
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        <Header />
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="text-center">
+            <h2 className="text-xl font-semibold text-gray-900">Loading properties...</h2>
+          </div>
+        </main>
+      </div>
+    )
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        <Header />
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="text-center">
+            <h2 className="text-xl font-semibold text-red-600">{error}</h2>
+          </div>
+        </main>
+      </div>
+    )
+  }
+
+  if (!loadedProperties.length) {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        <Header />
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="text-center">
+            <h2 className="text-xl font-semibold text-gray-900">No properties available</h2>
+          </div>
+        </main>
+      </div>
+    )
+  }
+
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
@@ -14,7 +70,7 @@ export default function PropertiesPage() {
         </h1>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {properties.map(property => (
+          {loadedProperties.map(property => (
             <Link 
               key={property.id} 
               href={`/properties/${property.id}`}
@@ -26,6 +82,8 @@ export default function PropertiesPage() {
                   alt={property.address}
                   fill
                   className="object-cover"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  priority={property.id <= 3}
                 />
                 <div className="absolute top-4 left-4">
                   <span className="bg-primary text-white px-4 py-2 rounded-full text-sm font-medium">
