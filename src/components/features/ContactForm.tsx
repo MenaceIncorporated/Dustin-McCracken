@@ -2,12 +2,17 @@
 
 import { useState } from 'react'
 
-export default function ContactForm() {
+interface ContactFormProps {
+  subject?: string
+  message?: string
+}
+
+export default function ContactForm({ subject = '', message = '' }: ContactFormProps) {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
-    message: ''
+    message: message
   })
 
   const handleSubmit = async (e: React.FormEvent) => {
