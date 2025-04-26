@@ -1,7 +1,5 @@
 'use client'
 
-import { Search } from 'lucide-react'
-
 export default function SearchBar() {
   return (
     <div className="w-full max-w-3xl mx-auto">
@@ -9,6 +7,9 @@ export default function SearchBar() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {/* Location Input */}
           <div className="relative">
+            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <span className="text-gray-400">🔍</span>
+            </div>
             <input
               type="text"
               placeholder="Enter location or ZIP"
@@ -41,7 +42,6 @@ export default function SearchBar() {
             className="w-full bg-[#E31837] text-white py-2 px-4 rounded-md hover:bg-[#CC1630] transition-colors duration-200 flex items-center justify-center"
             aria-label="Search homes"
           >
-            <Search className="h-5 w-5 mr-2" />
             SEARCH HOMES
           </button>
         </div>

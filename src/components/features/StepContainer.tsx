@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
-import { ChevronDown, ChevronUp } from 'lucide-react'
 
 interface StepContainerProps {
   stepNumber: number
@@ -40,11 +39,9 @@ export default function StepContainer({
               className="text-[#E31837] font-medium flex items-center hover:text-[#CC1630] transition-colors duration-200"
             >
               {isExpanded ? 'Show Less' : 'Read More'}
-              {isExpanded ? (
-                <ChevronUp className="ml-2 h-5 w-5" />
-              ) : (
-                <ChevronDown className="ml-2 h-5 w-5" />
-              )}
+              <span className="text-gray-600 ml-2">
+                {isExpanded ? '▲' : '▼'}
+              </span>
             </button>
           </div>
         </div>

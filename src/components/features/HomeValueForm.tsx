@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { Search } from 'lucide-react'
 
 export default function HomeValueForm() {
   const [address, setAddress] = useState('')
@@ -36,10 +35,10 @@ export default function HomeValueForm() {
             />
             <button
               type="submit"
-              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-[#E31837] hover:text-[#CC1630]"
+              className="absolute right-2 top-1/2 -translate-y-1/2 rounded-md p-2 text-muted-foreground hover:text-foreground"
               aria-label="Search"
             >
-              <Search className="h-5 w-5" />
+              <span className="text-lg">🔍</span>
             </button>
           </div>
         </div>

@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { ChevronDown, ChevronUp } from 'lucide-react'
 import Image from 'next/image'
 
 interface FAQItemProps {
@@ -26,11 +25,9 @@ export default function FAQItem({ questionNumber, question, answer, imageUrl }: 
           </span>
           <h3 className="text-lg font-semibold text-gray-900">{question}</h3>
         </div>
-        {isExpanded ? (
-          <ChevronUp className="h-5 w-5 text-gray-400" />
-        ) : (
-          <ChevronDown className="h-5 w-5 text-gray-400" />
-        )}
+        <span className="text-gray-600">
+          {isExpanded ? '▲' : '▼'}
+        </span>
       </button>
 
       <div

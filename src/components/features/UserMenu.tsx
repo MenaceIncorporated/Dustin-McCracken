@@ -3,7 +3,6 @@
 import { useAuth } from '@/contexts/AuthContext'
 import { Menu, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
-import { ChevronDown, LogOut, User } from 'lucide-react'
 
 export default function UserMenu() {
   const { user, signOut } = useAuth()
@@ -24,7 +23,7 @@ export default function UserMenu() {
       <div>
         <Menu.Button className="inline-flex w-full justify-center items-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
           <span className="truncate max-w-[150px]">{user.email}</span>
-          <ChevronDown className="-mr-1 h-5 w-5 text-gray-400" aria-hidden="true" />
+          <span className="text-gray-400">▼</span>
         </Menu.Button>
       </div>
 
@@ -47,7 +46,7 @@ export default function UserMenu() {
                     active ? 'bg-gray-100 text-gray-900' : 'text-gray-700'
                   } flex items-center px-4 py-2 text-sm`}
                 >
-                  <User className="mr-3 h-5 w-5 text-gray-400" aria-hidden="true" />
+                  <span className="mr-3 text-gray-400">👤</span>
                   Profile
                 </a>
               )}
@@ -60,7 +59,7 @@ export default function UserMenu() {
                     active ? 'bg-gray-100 text-gray-900' : 'text-gray-700'
                   } flex w-full items-center px-4 py-2 text-sm`}
                 >
-                  <LogOut className="mr-3 h-5 w-5 text-gray-400" aria-hidden="true" />
+                  <span className="mr-3 text-gray-400">🚪</span>
                   Sign out
                 </button>
               )}
