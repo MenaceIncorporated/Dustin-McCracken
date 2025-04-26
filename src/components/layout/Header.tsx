@@ -12,13 +12,13 @@ export default function Header() {
     <header className="bg-white shadow-sm">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
-          <div className="flex">
+          <div className="flex items-center justify-between w-full">
             <div className="flex-shrink-0 flex items-center">
               <Link href="/" className="text-xl font-bold text-gray-900">
                 Dustin McCracken
               </Link>
             </div>
-            <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
+            <div className="hidden sm:flex sm:space-x-8">
               <Link
                 href="/properties"
                 className={`${
@@ -49,6 +49,36 @@ export default function Header() {
               >
                 Sell
               </Link>
+              <Link
+                href="/news"
+                className={`${
+                  pathname === '/news'
+                    ? 'border-primary text-gray-900'
+                    : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
+                } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
+              >
+                News
+              </Link>
+              <Link
+                href="/programs"
+                className={`${
+                  pathname === '/programs'
+                    ? 'border-primary text-gray-900'
+                    : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
+                } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
+              >
+                Programs
+              </Link>
+              <Link
+                href="/contact"
+                className={`${
+                  pathname === '/contact'
+                    ? 'border-primary text-gray-900'
+                    : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
+                } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
+              >
+                Contact
+              </Link>
               <div className="relative">
                 <button
                   onClick={() => setIsToolsOpen(!isToolsOpen)}
@@ -56,7 +86,7 @@ export default function Header() {
                     ['/instant-offer', '/instant-home-value'].includes(pathname)
                       ? 'border-primary text-gray-900'
                       : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
-                  } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium group`}
+                  } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
                 >
                   Tools
                   <svg
@@ -73,7 +103,7 @@ export default function Header() {
                   </svg>
                 </button>
                 {isToolsOpen && (
-                  <div className="absolute z-10 -ml-4 mt-3 transform px-2 w-screen max-w-md sm:px-0 lg:ml-0 lg:left-1/2 lg:-translate-x-1/2">
+                  <div className="absolute z-10 right-0 mt-3 transform px-2 w-screen max-w-md sm:px-0">
                     <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
                       <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
                         <Link
@@ -125,36 +155,6 @@ export default function Header() {
                   </div>
                 )}
               </div>
-              <Link
-                href="/news"
-                className={`${
-                  pathname === '/news'
-                    ? 'border-primary text-gray-900'
-                    : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
-                } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
-              >
-                News
-              </Link>
-              <Link
-                href="/programs"
-                className={`${
-                  pathname === '/programs'
-                    ? 'border-primary text-gray-900'
-                    : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
-                } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
-              >
-                Programs
-              </Link>
-              <Link
-                href="/contact"
-                className={`${
-                  pathname === '/contact'
-                    ? 'border-primary text-gray-900'
-                    : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
-                } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium`}
-              >
-                Contact
-              </Link>
             </div>
           </div>
         </div>
