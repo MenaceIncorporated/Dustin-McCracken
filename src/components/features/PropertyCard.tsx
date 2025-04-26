@@ -2,7 +2,16 @@
 
 import Image from 'next/image'
 
-export default function PropertyCard({ imageUrl, price, address, beds, baths, sqft }) {
+type PropertyCardProps = {
+  imageUrl: string
+  price: number
+  address: string
+  beds: number
+  baths: number
+  sqft: number
+}
+
+export default function PropertyCard({ imageUrl, price, address, beds, baths, sqft }: PropertyCardProps) {
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden">
       <div className="relative h-48">
