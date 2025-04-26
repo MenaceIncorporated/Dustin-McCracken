@@ -155,7 +155,7 @@ export default function PropertyPage({ params }: { params: { id: string } }) {
         </div>
 
         <div className="mt-12">
-          <MortgageCalculator propertyPrice={property.price} />
+          <MortgageCalculator defaultPrice={property.price} />
         </div>
       </main>
     </div>
