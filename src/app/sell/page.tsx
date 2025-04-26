@@ -85,7 +85,7 @@ const resources = [
   },
   {
     title: 'Selling Tips',
-    description: 'Read our latest articles on maximizing your home's value',
+    description: 'Read our latest articles on maximizing your home\'s value',
     link: '/news',
     icon: (
       <svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
