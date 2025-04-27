@@ -2,7 +2,8 @@
 
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
-import Slider from '@/components/ui/Slider'
+import { Slider } from '@/components/ui/Slider'
+import { formatCurrency, formatPercentage } from '@/lib/utils'
 
 interface EligibilityCalculatorProps {
   programId: string
@@ -194,76 +195,61 @@ export default function EligibilityCalculator({
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Annual Income: ${annualIncome.toLocaleString()}
-          </label>
           <Slider
             value={annualIncome}
             min={30000}
             max={500000}
             step={1000}
-            onChange={setAnnualIncome}
+            onValueChange={setAnnualIncome}
             label="Annual Income"
-            formatValue={(val) => `$${val.toLocaleString()}`}
+            formatValue={formatCurrency}
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Monthly Debts: ${monthlyDebts.toLocaleString()}
-          </label>
           <Slider
             value={monthlyDebts}
             min={0}
             max={10000}
             step={100}
-            onChange={setMonthlyDebts}
+            onValueChange={setMonthlyDebts}
             label="Monthly Debts"
-            formatValue={(val) => `$${val.toLocaleString()}`}
+            formatValue={formatCurrency}
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Credit Score: {creditScore}
-          </label>
           <Slider
             value={creditScore}
             min={300}
             max={850}
             step={10}
-            onChange={setCreditScore}
+            onValueChange={setCreditScore}
             label="Credit Score"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Estimated Home Price: ${estimatedHomePrice.toLocaleString()}
-          </label>
           <Slider
             value={estimatedHomePrice}
             min={100000}
             max={2000000}
             step={10000}
-            onChange={setEstimatedHomePrice}
+            onValueChange={setEstimatedHomePrice}
             label="Estimated Home Price"
-            formatValue={(val) => `$${val.toLocaleString()}`}
+            formatValue={formatCurrency}
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Down Payment: ${downPayment.toLocaleString()} ({((downPayment / estimatedHomePrice) * 100).toFixed(1)}%)
-          </label>
           <Slider
             value={downPayment}
             min={0}
             max={estimatedHomePrice}
             step={5000}
-            onChange={setDownPayment}
+            onValueChange={setDownPayment}
             label="Down Payment"
-            formatValue={(val) => `$${val.toLocaleString()} (${((val / estimatedHomePrice) * 100).toFixed(1)}%)`}
+            formatValue={(val) => `${formatCurrency(val)} (${formatPercentage((val / estimatedHomePrice) * 100)})`}
           />
         </div>
       </div>
@@ -300,25 +286,25 @@ export default function EligibilityCalculator({
               <div>
                 <p className="text-sm font-medium text-gray-700">DTI Ratio</p>
                 <p className={`text-lg ${result.metrics.dti > 43 ? 'text-red-600' : 'text-green-600'}`}>
-                  {result.metrics.dti.toFixed(1)}%
+                  {formatPercentage(result.metrics.dti)}
                 </p>
               </div>
               <div>
                 <p className="text-sm font-medium text-gray-700">LTV Ratio</p>
                 <p className={`text-lg ${result.metrics.ltv > 80 ? 'text-yellow-600' : 'text-green-600'}`}>
-                  {result.metrics.ltv.toFixed(1)}%
+                  {formatPercentage(result.metrics.ltv)}
                 </p>
               </div>
               <div>
                 <p className="text-sm font-medium text-gray-700">Est. Monthly Payment</p>
                 <p className="text-lg text-gray-900">
-                  ${Math.round(result.metrics.piti).toLocaleString()}
+                  {formatCurrency(Math.round(result.metrics.piti))}
                 </p>
               </div>
               <div>
                 <p className="text-sm font-medium text-gray-700">Max Loan Amount</p>
                 <p className="text-lg text-gray-900">
-                  ${result.metrics.maxLoanAmount.toLocaleString()}
+                  {formatCurrency(result.metrics.maxLoanAmount)}
                 </p>
               </div>
             </div>

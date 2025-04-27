@@ -1,9 +1,10 @@
 'use client'
 
 import { useState } from 'react'
-import Slider from '@/components/ui/Slider'
+import { Slider } from '@/components/ui/Slider'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Button } from '@/components/ui/button'
+import { formatCurrency, formatNumber } from '@/lib/utils'
 
 interface FiltersProps {
   onApply: (filters: {
@@ -75,9 +76,9 @@ export default function Filters({ onApply, onSaveSearch, onClose }: FiltersProps
               min={0}
               max={2000000}
               step={10000}
-              onChange={setPriceRange}
+              onValueChange={setPriceRange}
               label="Price Range"
-              formatValue={(val) => `$${val.toLocaleString()}`}
+              formatValue={formatCurrency}
             />
           </div>
 
@@ -89,9 +90,9 @@ export default function Filters({ onApply, onSaveSearch, onClose }: FiltersProps
               min={0}
               max={10000}
               step={100}
-              onChange={setSquareFootage}
+              onValueChange={setSquareFootage}
               label="Square Footage"
-              formatValue={(val) => `${val.toLocaleString()} sqft`}
+              formatValue={(val) => `${formatNumber(val)} sqft`}
             />
           </div>
 
@@ -103,7 +104,7 @@ export default function Filters({ onApply, onSaveSearch, onClose }: FiltersProps
               min={1900}
               max={new Date().getFullYear()}
               step={1}
-              onChange={setYearBuilt}
+              onValueChange={setYearBuilt}
               label="Year Built"
             />
           </div>
@@ -116,7 +117,7 @@ export default function Filters({ onApply, onSaveSearch, onClose }: FiltersProps
               min={0}
               max={5}
               step={0.1}
-              onChange={setLotSize}
+              onValueChange={setLotSize}
               label="Lot Size"
               formatValue={(val) => `${val} acres`}
             />

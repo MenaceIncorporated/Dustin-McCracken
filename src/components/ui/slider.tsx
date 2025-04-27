@@ -1,63 +1,82 @@
-'use client'
+"use client";
 
-import React from 'react';
-import { Slider as HeadlessSlider } from '@headlessui/react';
+import React, { useState, useEffect } from 'react';
+import * as SliderPrimitive from '@radix-ui/react-slider';
+import { cn } from '@/lib/utils';
 
-interface SliderProps {
-  min: number;
-  max: number;
-  step?: number;
-  value: number | [number, number];
-  onChange: (value: number | [number, number]) => void;
-  label?: string;
+interface SliderProps extends React.ComponentPropsWithoutRef<typeof SliderPrimitive.Root> {
   formatValue?: (value: number) => string;
+  label?: string;
+  valueDisplay?: string | number;
+  showValue?: boolean;
 }
 
-const Slider: React.FC<SliderProps> = ({
-  min,
-  max,
-  step = 1,
-  value,
-  onChange,
+const Slider = React.forwardRef<
+  React.ElementRef<typeof SliderPrimitive.Root>,
+  SliderProps
+>(({
+  className,
+  formatValue,
   label,
-  formatValue = (val) => val.toString(),
-}) => {
-  const isRange = Array.isArray(value);
-  const currentValue = isRange ? value[0] : value;
+  valueDisplay,
+  showValue = true,
+  ...props
+}, ref) => {
+  const [displayValue, setDisplayValue] = useState<string | number>(
+    valueDisplay !== undefined
+      ? valueDisplay
+      : props.defaultValue
+      ? Array.isArray(props.defaultValue)
+        ? props.defaultValue[0]
+        : props.defaultValue
+      : 0
+  );
+
+  useEffect(() => {
+    if (valueDisplay !== undefined) {
+      setDisplayValue(valueDisplay);
+    }
+  }, [valueDisplay]);
+
+  const handleValueChange = (values: number[]) => {
+    const newValue = values[0];
+    if (formatValue) {
+      setDisplayValue(formatValue(newValue));
+    } else {
+      setDisplayValue(newValue);
+    }
+    
+    if (props.onValueChange) {
+      props.onValueChange(values);
+    }
+  };
 
   return (
-    <div className="w-full">
+    <div className="space-y-2">
       {label && (
-        <div className="flex justify-between mb-2">
-          <label className="text-sm font-medium text-gray-700">{label}</label>
-          <span className="text-sm text-gray-500">
-            {isRange 
-              ? `${formatValue(value[0])} - ${formatValue(value[1])}`
-              : formatValue(value)}
-          </span>
+        <div className="flex justify-between items-center">
+          <label className="text-sm font-medium text-text-secondary">{label}</label>
+          {showValue && <span className="text-sm font-medium text-text">{displayValue}</span>}
         </div>
       )}
-      <HeadlessSlider
-        value={currentValue}
-        onChange={(val) => {
-          if (isRange) {
-            onChange([val, value[1]]);
-          } else {
-            onChange(val);
-          }
-        }}
-        min={min}
-        max={max}
-        step={step}
-        className="relative h-2 w-full rounded-full bg-gray-200"
+      <SliderPrimitive.Root
+        ref={ref}
+        className={cn(
+          "relative flex w-full touch-none select-none items-center",
+          className
+        )}
+        onValueChange={handleValueChange}
+        {...props}
       >
-        <HeadlessSlider.Track className="absolute h-2 w-full rounded-full bg-gray-200">
-          <HeadlessSlider.Range className="absolute h-2 rounded-full bg-primary" />
-        </HeadlessSlider.Track>
-        <HeadlessSlider.Thumb className="relative h-5 w-5 rounded-full bg-white shadow-lg ring-1 ring-gray-400 focus:outline-none focus:ring-2 focus:ring-primary" />
-      </HeadlessSlider>
+        <SliderPrimitive.Track className="relative h-2 w-full grow overflow-hidden rounded-full bg-tertiary">
+          <SliderPrimitive.Range className="absolute h-full bg-primary" />
+        </SliderPrimitive.Track>
+        <SliderPrimitive.Thumb className="block h-5 w-5 rounded-full border-2 border-white bg-primary shadow transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50" />
+      </SliderPrimitive.Root>
     </div>
   );
-};
+});
 
-export default Slider; 
+Slider.displayName = "Slider";
+
+export { Slider }; 

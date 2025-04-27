@@ -5,7 +5,8 @@ import Header from '@/components/layout/Header'
 import SearchBar from '@/components/layout/SearchBar'
 import PropertyCard from '@/components/features/PropertyCard'
 import { Checkbox } from '@/components/ui/checkbox'
-import Slider from '@/components/ui/Slider'
+import { Slider } from '@/components/ui/Slider'
+import { formatCurrency } from '@/lib/utils'
 
 const properties = [
   {
@@ -105,17 +106,14 @@ export default function BuyPage() {
               
               {/* Price Range */}
               <div className="mb-6">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Price Range
-                </label>
                 <Slider
                   value={priceRange}
                   min={0}
                   max={2000000}
                   step={50000}
-                  onChange={setPriceRange}
+                  onValueChange={setPriceRange}
                   label="Price Range"
-                  formatValue={(val) => `$${val.toLocaleString()}`}
+                  formatValue={formatCurrency}
                 />
               </div>
 

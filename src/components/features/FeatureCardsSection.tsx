@@ -1,6 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import { PlusIcon } from '@heroicons/react/outline'
+import Image from 'next/image'
 
 export default function FeatureCardsSection() {
   const features = [
@@ -65,6 +66,9 @@ export default function FeatureCardsSection() {
               
               <div className="feature-card-icon">
                 <PlusIcon className="h-5 w-5" />
+              </div>
+              <div className="absolute bottom-2 right-2 opacity-20 pointer-events-none">
+                <Image src="/exp-logo-r.png" alt="eXp Realty Watermark" width={32} height={32} />
               </div>
             </Link>
           ))}
