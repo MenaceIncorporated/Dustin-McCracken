@@ -83,4 +83,194 @@
   .input {
     @apply flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50;
   }
+
+  /* Typography */
+  .heading-1 {
+    @apply text-4xl font-light text-text-secondary sm:text-5xl md:text-6xl;
+  }
+  
+  .heading-1-emphasis {
+    @apply text-4xl font-bold text-text sm:text-5xl md:text-6xl;
+  }
+  
+  .heading-2 {
+    @apply text-3xl font-light text-text-secondary sm:text-4xl;
+  }
+  
+  .heading-2-emphasis {
+    @apply text-3xl font-bold text-text sm:text-4xl;
+  }
+  
+  .heading-3 {
+    @apply text-2xl font-light text-text-secondary;
+  }
+  
+  .heading-3-emphasis {
+    @apply text-2xl font-bold text-text;
+  }
+  
+  .subtitle {
+    @apply text-xl text-text-secondary;
+  }
+  
+  .body-large {
+    @apply text-lg text-text-secondary;
+  }
+  
+  .body {
+    @apply text-base text-text-secondary;
+  }
+  
+  .caption {
+    @apply text-sm text-text-light;
+  }
+  
+  /* Buttons */
+  .btn-primary {
+    @apply px-6 py-3 bg-primary text-white font-medium rounded-md hover:bg-primary-light focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors;
+  }
+  
+  .btn-secondary {
+    @apply px-6 py-3 bg-secondary text-white font-medium rounded-md hover:bg-secondary-light focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary transition-colors;
+  }
+  
+  .btn-tertiary {
+    @apply px-6 py-3 bg-tertiary text-text font-medium rounded-md hover:bg-tertiary-light focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-tertiary transition-colors;
+  }
+  
+  .btn-outline {
+    @apply px-6 py-3 bg-white text-primary border border-primary font-medium rounded-md hover:bg-background-light focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors;
+  }
+  
+  .btn-text {
+    @apply text-primary font-medium hover:text-primary-light focus:outline-none transition-colors;
+  }
+  
+  /* Cards */
+  .card {
+    @apply bg-white rounded-lg overflow-hidden;
+  }
+  
+  .card-primary {
+    @apply bg-primary text-white rounded-lg overflow-hidden;
+  }
+  
+  .card-secondary {
+    @apply bg-secondary text-white rounded-lg overflow-hidden;
+  }
+  
+  .card-tertiary {
+    @apply bg-tertiary text-text rounded-lg overflow-hidden;
+  }
+  
+  .card-title {
+    @apply text-xl font-bold;
+  }
+  
+  .card-body {
+    @apply p-6;
+  }
+  
+  /* Property Feature Cards (like in the eXp example) */
+  .feature-card {
+    @apply relative overflow-hidden rounded-lg transform rotate-3 hover:rotate-0 transition-transform duration-300;
+  }
+  
+  .feature-card-primary {
+    @apply feature-card bg-primary text-white;
+  }
+  
+  .feature-card-secondary {
+    @apply feature-card bg-secondary text-white;
+  }
+  
+  .feature-card-tertiary {
+    @apply feature-card bg-tertiary text-text;
+  }
+  
+  .feature-card-white {
+    @apply feature-card bg-white text-text border border-gray-200;
+  }
+  
+  .feature-card-image {
+    @apply w-40 h-40 rounded-full mx-auto overflow-hidden;
+  }
+  
+  .feature-card-title {
+    @apply text-2xl font-light mb-4;
+  }
+  
+  .feature-card-icon {
+    @apply absolute bottom-4 right-4 w-8 h-8 text-white bg-white bg-opacity-30 rounded-full flex items-center justify-center;
+  }
+  
+  /* Forms */
+  .form-input {
+    @apply block w-full px-3 py-2 border border-gray-200 rounded-md bg-white placeholder-text-light focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary;
+  }
+  
+  .form-label {
+    @apply block text-sm font-medium text-text-secondary;
+  }
+  
+  .form-error {
+    @apply mt-1 text-sm text-red-600;
+  }
+  
+  /* Navigation */
+  .nav-link {
+    @apply text-text-secondary hover:text-primary transition-colors;
+  }
+  
+  .nav-link-active {
+    @apply text-primary;
+  }
+  
+  /* Header */
+  .header {
+    @apply bg-white border-b border-gray-100 py-4;
+  }
+  
+  .logo {
+    @apply text-text font-bold;
+  }
+  
+  /* Hero Section */
+  .hero {
+    @apply py-24 md:py-32;
+  }
+  
+  .hero-title {
+    @apply text-5xl md:text-7xl font-light text-text-secondary;
+  }
+  
+  .hero-title-emphasis {
+    @apply text-5xl md:text-7xl font-bold text-text;
+  }
+  
+  .hero-subtitle {
+    @apply text-xl text-text-secondary mt-6;
+  }
+  
+  /* Footer */
+  .footer {
+    @apply bg-background-light text-text-secondary pt-12 pb-6;
+  }
+  
+  .footer-heading {
+    @apply text-lg font-medium text-text mb-4;
+  }
+  
+  .footer-link {
+    @apply text-text-secondary hover:text-primary transition-colors;
+  }
+  
+  /* Call to action sections */
+  .cta-section {
+    @apply bg-primary text-white py-16;
+  }
+  
+  .cta-section-light {
+    @apply bg-tertiary text-text py-16;
+  }
 }
