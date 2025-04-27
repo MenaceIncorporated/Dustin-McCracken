@@ -196,11 +196,11 @@ export default function EligibilityCalculator({
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <Slider
-            value={annualIncome}
+            value={[annualIncome]}
             min={30000}
             max={500000}
             step={1000}
-            onValueChange={setAnnualIncome}
+            onValueChange={([val]) => setAnnualIncome(val)}
             label="Annual Income"
             formatValue={formatCurrency}
           />
@@ -208,11 +208,11 @@ export default function EligibilityCalculator({
 
         <div>
           <Slider
-            value={monthlyDebts}
+            value={[monthlyDebts]}
             min={0}
             max={10000}
             step={100}
-            onValueChange={setMonthlyDebts}
+            onValueChange={([val]) => setMonthlyDebts(val)}
             label="Monthly Debts"
             formatValue={formatCurrency}
           />
@@ -220,22 +220,22 @@ export default function EligibilityCalculator({
 
         <div>
           <Slider
-            value={creditScore}
+            value={[creditScore]}
             min={300}
             max={850}
             step={10}
-            onValueChange={setCreditScore}
+            onValueChange={([val]) => setCreditScore(val)}
             label="Credit Score"
           />
         </div>
 
         <div>
           <Slider
-            value={estimatedHomePrice}
+            value={[estimatedHomePrice]}
             min={100000}
             max={2000000}
             step={10000}
-            onValueChange={setEstimatedHomePrice}
+            onValueChange={([val]) => setEstimatedHomePrice(val)}
             label="Estimated Home Price"
             formatValue={formatCurrency}
           />
@@ -243,11 +243,11 @@ export default function EligibilityCalculator({
 
         <div>
           <Slider
-            value={downPayment}
+            value={[downPayment]}
             min={0}
             max={estimatedHomePrice}
             step={5000}
-            onValueChange={setDownPayment}
+            onValueChange={([val]) => setDownPayment(val)}
             label="Down Payment"
             formatValue={(val) => `${formatCurrency(val)} (${formatPercentage((val / estimatedHomePrice) * 100)})`}
           />

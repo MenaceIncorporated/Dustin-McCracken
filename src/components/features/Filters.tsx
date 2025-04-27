@@ -76,7 +76,7 @@ export default function Filters({ onApply, onSaveSearch, onClose }: FiltersProps
               min={0}
               max={2000000}
               step={10000}
-              onValueChange={setPriceRange}
+              onValueChange={(val) => setPriceRange(val as [number, number])}
               label="Price Range"
               formatValue={formatCurrency}
             />
@@ -90,7 +90,7 @@ export default function Filters({ onApply, onSaveSearch, onClose }: FiltersProps
               min={0}
               max={10000}
               step={100}
-              onValueChange={setSquareFootage}
+              onValueChange={(val) => setSquareFootage(val as [number, number])}
               label="Square Footage"
               formatValue={(val) => `${formatNumber(val)} sqft`}
             />
@@ -104,7 +104,7 @@ export default function Filters({ onApply, onSaveSearch, onClose }: FiltersProps
               min={1900}
               max={new Date().getFullYear()}
               step={1}
-              onValueChange={setYearBuilt}
+              onValueChange={(val) => setYearBuilt(val as [number, number])}
               label="Year Built"
             />
           </div>
@@ -117,7 +117,7 @@ export default function Filters({ onApply, onSaveSearch, onClose }: FiltersProps
               min={0}
               max={5}
               step={0.1}
-              onValueChange={setLotSize}
+              onValueChange={(val) => setLotSize(val as [number, number])}
               label="Lot Size"
               formatValue={(val) => `${val} acres`}
             />
