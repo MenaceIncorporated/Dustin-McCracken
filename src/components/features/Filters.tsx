@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Slider } from '@/components/ui/Slider'
+import Slider from '@/components/ui/Slider'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Button } from '@/components/ui/button'
 

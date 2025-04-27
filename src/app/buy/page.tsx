@@ -5,7 +5,7 @@ import Header from '@/components/layout/Header'
 import SearchBar from '@/components/layout/SearchBar'
 import PropertyCard from '@/components/features/PropertyCard'
 import { Checkbox } from '@/components/ui/checkbox'
-import { Slider } from '@/components/ui/Slider'
+import Slider from '@/components/ui/Slider'
 
 const properties = [
   {

@@ -13,7 +13,7 @@ interface SliderProps {
   formatValue?: (value: number) => string;
 }
 
-export const Slider: React.FC<SliderProps> = ({
+const Slider: React.FC<SliderProps> = ({
   min,
   max,
   step = 1,
@@ -58,4 +58,6 @@ export const Slider: React.FC<SliderProps> = ({
       </HeadlessSlider>
     </div>
   );
-}; 
+};
+
+export default Slider; 
