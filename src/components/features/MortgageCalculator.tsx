@@ -41,11 +41,13 @@ export default function MortgageCalculator({ defaultPrice = 500000 }: MortgageCa
             Home Price: ${homePrice.toLocaleString()}
           </label>
           <Slider
-            defaultValue={[homePrice]}
+            value={homePrice}
             min={100000}
             max={2000000}
             step={5000}
-            onValueChange={(value) => setHomePrice(value[0])}
+            onChange={setHomePrice}
+            label="Home Price"
+            formatValue={(val) => `$${val.toLocaleString()}`}
           />
         </div>
 
@@ -55,11 +57,13 @@ export default function MortgageCalculator({ defaultPrice = 500000 }: MortgageCa
             Down Payment: ${downPayment.toLocaleString()} ({((downPayment / homePrice) * 100).toFixed(1)}%)
           </label>
           <Slider
-            defaultValue={[downPayment]}
+            value={downPayment}
             min={0}
             max={homePrice}
             step={5000}
-            onValueChange={(value) => setDownPayment(value[0])}
+            onChange={setDownPayment}
+            label="Down Payment"
+            formatValue={(val) => `$${val.toLocaleString()} (${((val / homePrice) * 100).toFixed(1)}%)`}
           />
         </div>
 
@@ -91,11 +95,13 @@ export default function MortgageCalculator({ defaultPrice = 500000 }: MortgageCa
             Interest Rate: {interestRate}%
           </label>
           <Slider
-            defaultValue={[interestRate * 10]}
+            value={interestRate * 10}
             min={25}
             max={100}
             step={1}
-            onValueChange={(value) => setInterestRate(value[0] / 10)}
+            onChange={(val) => setInterestRate(val / 10)}
+            label="Interest Rate"
+            formatValue={(val) => `${(val / 10).toFixed(1)}%`}
           />
         </div>
 

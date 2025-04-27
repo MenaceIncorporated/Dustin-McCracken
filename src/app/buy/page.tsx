@@ -109,15 +109,23 @@ export default function BuyPage() {
                   Price Range
                 </label>
                 <Slider
-                  defaultValue={[0, 2000000]}
+                  value={priceRange[0]}
+                  min={0}
                   max={2000000}
                   step={50000}
-                  onValueChange={setPriceRange}
+                  onChange={(val) => setPriceRange([val, priceRange[1]])}
+                  label="Min Price"
+                  formatValue={(val) => `$${val.toLocaleString()}`}
                 />
-                <div className="flex justify-between mt-2 text-sm text-gray-600">
-                  <span>${priceRange[0].toLocaleString()}</span>
-                  <span>${priceRange[1].toLocaleString()}</span>
-                </div>
+                <Slider
+                  value={priceRange[1]}
+                  min={0}
+                  max={2000000}
+                  step={50000}
+                  onChange={(val) => setPriceRange([priceRange[0], val])}
+                  label="Max Price"
+                  formatValue={(val) => `$${val.toLocaleString()}`}
+                />
               </div>
 
               {/* Property Type */}

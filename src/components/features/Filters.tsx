@@ -71,68 +71,90 @@ export default function Filters({ onApply, onSaveSearch, onClose }: FiltersProps
           <div>
             <h3 className="font-medium mb-2">Price Range</h3>
             <Slider
-              defaultValue={priceRange}
-              value={priceRange}
-              onValueChange={(value) => setPriceRange([value[0], value[1]])}
+              value={priceRange[0]}
               min={0}
               max={2000000}
               step={10000}
+              onChange={(val) => setPriceRange([val, priceRange[1]])}
+              label="Min Price"
+              formatValue={(val) => `$${val.toLocaleString()}`}
             />
-            <div className="flex justify-between mt-2">
-              <span>${priceRange[0].toLocaleString()}</span>
-              <span>${priceRange[1].toLocaleString()}</span>
-            </div>
+            <Slider
+              value={priceRange[1]}
+              min={0}
+              max={2000000}
+              step={10000}
+              onChange={(val) => setPriceRange([priceRange[0], val])}
+              label="Max Price"
+              formatValue={(val) => `$${val.toLocaleString()}`}
+            />
           </div>
 
           {/* Square Footage */}
           <div>
             <h3 className="font-medium mb-2">Square Footage</h3>
             <Slider
-              defaultValue={squareFootage}
-              value={squareFootage}
-              onValueChange={(value) => setSquareFootage([value[0], value[1]])}
+              value={squareFootage[0]}
               min={0}
               max={10000}
               step={100}
+              onChange={(val) => setSquareFootage([val, squareFootage[1]])}
+              label="Min Square Footage"
+              formatValue={(val) => `${val.toLocaleString()} sqft`}
             />
-            <div className="flex justify-between mt-2">
-              <span>{squareFootage[0].toLocaleString()} sqft</span>
-              <span>{squareFootage[1].toLocaleString()} sqft</span>
-            </div>
+            <Slider
+              value={squareFootage[1]}
+              min={0}
+              max={10000}
+              step={100}
+              onChange={(val) => setSquareFootage([squareFootage[0], val])}
+              label="Max Square Footage"
+              formatValue={(val) => `${val.toLocaleString()} sqft`}
+            />
           </div>
 
           {/* Year Built */}
           <div>
             <h3 className="font-medium mb-2">Year Built</h3>
             <Slider
-              defaultValue={yearBuilt}
-              value={yearBuilt}
-              onValueChange={(value) => setYearBuilt([value[0], value[1]])}
+              value={yearBuilt[0]}
               min={1900}
               max={new Date().getFullYear()}
               step={1}
+              onChange={(val) => setYearBuilt([val, yearBuilt[1]])}
+              label="Min Year"
             />
-            <div className="flex justify-between mt-2">
-              <span>{yearBuilt[0]}</span>
-              <span>{yearBuilt[1]}</span>
-            </div>
+            <Slider
+              value={yearBuilt[1]}
+              min={1900}
+              max={new Date().getFullYear()}
+              step={1}
+              onChange={(val) => setYearBuilt([yearBuilt[0], val])}
+              label="Max Year"
+            />
           </div>
 
           {/* Lot Size */}
           <div>
             <h3 className="font-medium mb-2">Lot Size (Acres)</h3>
             <Slider
-              defaultValue={lotSize}
-              value={lotSize}
-              onValueChange={(value) => setLotSize([value[0], value[1]])}
+              value={lotSize[0]}
               min={0}
               max={5}
               step={0.1}
+              onChange={(val) => setLotSize([val, lotSize[1]])}
+              label="Min Lot Size"
+              formatValue={(val) => `${val} acres`}
             />
-            <div className="flex justify-between mt-2">
-              <span>{lotSize[0]} acres</span>
-              <span>{lotSize[1]} acres</span>
-            </div>
+            <Slider
+              value={lotSize[1]}
+              min={0}
+              max={5}
+              step={0.1}
+              onChange={(val) => setLotSize([lotSize[0], val])}
+              label="Max Lot Size"
+              formatValue={(val) => `${val} acres`}
+            />
           </div>
 
           {/* Beds */}

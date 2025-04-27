@@ -198,11 +198,13 @@ export default function EligibilityCalculator({
             Annual Income: ${annualIncome.toLocaleString()}
           </label>
           <Slider
-            defaultValue={[annualIncome]}
+            value={annualIncome}
             min={30000}
             max={500000}
             step={1000}
-            onValueChange={(value) => setAnnualIncome(value[0])}
+            onChange={setAnnualIncome}
+            label="Annual Income"
+            formatValue={(val) => `$${val.toLocaleString()}`}
           />
         </div>
 
@@ -211,11 +213,13 @@ export default function EligibilityCalculator({
             Monthly Debts: ${monthlyDebts.toLocaleString()}
           </label>
           <Slider
-            defaultValue={[monthlyDebts]}
+            value={monthlyDebts}
             min={0}
             max={10000}
             step={100}
-            onValueChange={(value) => setMonthlyDebts(value[0])}
+            onChange={setMonthlyDebts}
+            label="Monthly Debts"
+            formatValue={(val) => `$${val.toLocaleString()}`}
           />
         </div>
 
@@ -224,11 +228,12 @@ export default function EligibilityCalculator({
             Credit Score: {creditScore}
           </label>
           <Slider
-            defaultValue={[creditScore]}
+            value={creditScore}
             min={300}
             max={850}
             step={10}
-            onValueChange={(value) => setCreditScore(value[0])}
+            onChange={setCreditScore}
+            label="Credit Score"
           />
         </div>
 
@@ -237,11 +242,13 @@ export default function EligibilityCalculator({
             Estimated Home Price: ${estimatedHomePrice.toLocaleString()}
           </label>
           <Slider
-            defaultValue={[estimatedHomePrice]}
+            value={estimatedHomePrice}
             min={100000}
             max={2000000}
             step={10000}
-            onValueChange={(value) => setEstimatedHomePrice(value[0])}
+            onChange={setEstimatedHomePrice}
+            label="Estimated Home Price"
+            formatValue={(val) => `$${val.toLocaleString()}`}
           />
         </div>
 
@@ -250,11 +257,13 @@ export default function EligibilityCalculator({
             Down Payment: ${downPayment.toLocaleString()} ({((downPayment / estimatedHomePrice) * 100).toFixed(1)}%)
           </label>
           <Slider
-            defaultValue={[downPayment]}
+            value={downPayment}
             min={0}
             max={estimatedHomePrice}
             step={5000}
-            onValueChange={(value) => setDownPayment(value[0])}
+            onChange={setDownPayment}
+            label="Down Payment"
+            formatValue={(val) => `$${val.toLocaleString()} (${((val / estimatedHomePrice) * 100).toFixed(1)}%)`}
           />
         </div>
       </div>
