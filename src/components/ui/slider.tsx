@@ -1,14 +1,14 @@
 'use client'
 
-import React, { useState } from 'react';
+import React from 'react';
 import { Slider as HeadlessSlider } from '@headlessui/react';
 
 interface SliderProps {
   min: number;
   max: number;
   step?: number;
-  value: number;
-  onChange: (value: number) => void;
+  value: number | [number, number];
+  onChange: (value: number | [number, number]) => void;
   label?: string;
   formatValue?: (value: number) => string;
 }
@@ -22,17 +22,30 @@ export const Slider: React.FC<SliderProps> = ({
   label,
   formatValue = (val) => val.toString(),
 }) => {
+  const isRange = Array.isArray(value);
+  const currentValue = isRange ? value[0] : value;
+
   return (
     <div className="w-full">
       {label && (
         <div className="flex justify-between mb-2">
           <label className="text-sm font-medium text-gray-700">{label}</label>
-          <span className="text-sm text-gray-500">{formatValue(value)}</span>
+          <span className="text-sm text-gray-500">
+            {isRange 
+              ? `${formatValue(value[0])} - ${formatValue(value[1])}`
+              : formatValue(value)}
+          </span>
         </div>
       )}
       <HeadlessSlider
-        value={value}
-        onChange={onChange}
+        value={currentValue}
+        onChange={(val) => {
+          if (isRange) {
+            onChange([val, value[1]]);
+          } else {
+            onChange(val);
+          }
+        }}
         min={min}
         max={max}
         step={step}

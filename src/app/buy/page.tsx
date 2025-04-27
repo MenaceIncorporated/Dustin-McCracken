@@ -109,21 +109,12 @@ export default function BuyPage() {
                   Price Range
                 </label>
                 <Slider
-                  value={priceRange[0]}
+                  value={priceRange}
                   min={0}
                   max={2000000}
                   step={50000}
-                  onChange={(val) => setPriceRange([val, priceRange[1]])}
-                  label="Min Price"
-                  formatValue={(val) => `$${val.toLocaleString()}`}
-                />
-                <Slider
-                  value={priceRange[1]}
-                  min={0}
-                  max={2000000}
-                  step={50000}
-                  onChange={(val) => setPriceRange([priceRange[0], val])}
-                  label="Max Price"
+                  onChange={setPriceRange}
+                  label="Price Range"
                   formatValue={(val) => `$${val.toLocaleString()}`}
                 />
               </div>

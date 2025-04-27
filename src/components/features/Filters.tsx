@@ -71,21 +71,12 @@ export default function Filters({ onApply, onSaveSearch, onClose }: FiltersProps
           <div>
             <h3 className="font-medium mb-2">Price Range</h3>
             <Slider
-              value={priceRange[0]}
+              value={priceRange}
               min={0}
               max={2000000}
               step={10000}
-              onChange={(val) => setPriceRange([val, priceRange[1]])}
-              label="Min Price"
-              formatValue={(val) => `$${val.toLocaleString()}`}
-            />
-            <Slider
-              value={priceRange[1]}
-              min={0}
-              max={2000000}
-              step={10000}
-              onChange={(val) => setPriceRange([priceRange[0], val])}
-              label="Max Price"
+              onChange={setPriceRange}
+              label="Price Range"
               formatValue={(val) => `$${val.toLocaleString()}`}
             />
           </div>
@@ -94,21 +85,12 @@ export default function Filters({ onApply, onSaveSearch, onClose }: FiltersProps
           <div>
             <h3 className="font-medium mb-2">Square Footage</h3>
             <Slider
-              value={squareFootage[0]}
+              value={squareFootage}
               min={0}
               max={10000}
               step={100}
-              onChange={(val) => setSquareFootage([val, squareFootage[1]])}
-              label="Min Square Footage"
-              formatValue={(val) => `${val.toLocaleString()} sqft`}
-            />
-            <Slider
-              value={squareFootage[1]}
-              min={0}
-              max={10000}
-              step={100}
-              onChange={(val) => setSquareFootage([squareFootage[0], val])}
-              label="Max Square Footage"
+              onChange={setSquareFootage}
+              label="Square Footage"
               formatValue={(val) => `${val.toLocaleString()} sqft`}
             />
           </div>
@@ -117,20 +99,12 @@ export default function Filters({ onApply, onSaveSearch, onClose }: FiltersProps
           <div>
             <h3 className="font-medium mb-2">Year Built</h3>
             <Slider
-              value={yearBuilt[0]}
+              value={yearBuilt}
               min={1900}
               max={new Date().getFullYear()}
               step={1}
-              onChange={(val) => setYearBuilt([val, yearBuilt[1]])}
-              label="Min Year"
-            />
-            <Slider
-              value={yearBuilt[1]}
-              min={1900}
-              max={new Date().getFullYear()}
-              step={1}
-              onChange={(val) => setYearBuilt([yearBuilt[0], val])}
-              label="Max Year"
+              onChange={setYearBuilt}
+              label="Year Built"
             />
           </div>
 
@@ -138,21 +112,12 @@ export default function Filters({ onApply, onSaveSearch, onClose }: FiltersProps
           <div>
             <h3 className="font-medium mb-2">Lot Size (Acres)</h3>
             <Slider
-              value={lotSize[0]}
+              value={lotSize}
               min={0}
               max={5}
               step={0.1}
-              onChange={(val) => setLotSize([val, lotSize[1]])}
-              label="Min Lot Size"
-              formatValue={(val) => `${val} acres`}
-            />
-            <Slider
-              value={lotSize[1]}
-              min={0}
-              max={5}
-              step={0.1}
-              onChange={(val) => setLotSize([lotSize[0], val])}
-              label="Max Lot Size"
+              onChange={setLotSize}
+              label="Lot Size"
               formatValue={(val) => `${val} acres`}
             />
           </div>
